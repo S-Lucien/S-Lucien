@@ -1,0 +1,400 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Web前端开发大作业-仿Bilibili | RippleSu's Blog</title><meta name="author" content="RippleSu"><meta name="copyright" content="RippleSu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="网站基于Html5、CSS3和原生JavaScript实现，参照Bilibili的设计，并包含各种常用元素、样式、交互功能，内容丰富，可供前端入门人员参照学习。 Github 点击体验网站项目说明网站基于Html5、CSS3和原生JavaScript实现，参照Bilibili的设计，并包含各种常用元素、样式、交互功能，内容丰富，可供前端入门人员参照学习。 网站整体结构如下：  网站各项目详细说明网">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端开发大作业-仿Bilibili">
+<meta property="og:url" content="http://blog.ripplesu.top/2022/06/05/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/index.html">
+<meta property="og:site_name" content="RippleSu&#39;s Blog">
+<meta property="og:description" content="网站基于Html5、CSS3和原生JavaScript实现，参照Bilibili的设计，并包含各种常用元素、样式、交互功能，内容丰富，可供前端入门人员参照学习。 Github 点击体验网站项目说明网站基于Html5、CSS3和原生JavaScript实现，参照Bilibili的设计，并包含各种常用元素、样式、交互功能，内容丰富，可供前端入门人员参照学习。 网站整体结构如下：  网站各项目详细说明网">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.ripplesu.top/random?dir=%E7%AB%96%E5%B1%8F&Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili">
+<meta property="article:published_time" content="2022-06-05T03:22:33.000Z">
+<meta property="article:modified_time" content="2023-11-20T05:33:53.381Z">
+<meta property="article:author" content="RippleSu">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="Html">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.ripplesu.top/random?dir=%E7%AB%96%E5%B1%8F&Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://blog.ripplesu.top/2022/06/05/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: RippleSu","link":"链接: ","source":"来源: RippleSu's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Web前端开发大作业-仿Bilibili',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-20 13:33:53'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="http://121.41.55.70:9000/image-lib/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('http://img.ripplesu.top/random?dir=横屏')"><nav id="nav"><span id="blog-info"><a href="/" title="RippleSu's Blog"><span class="site-name">RippleSu's Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Web前端开发大作业-仿Bilibili</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-06-05T03:22:33.000Z" title="发表于 2022-06-05 11:22:33">2022-06-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-20T05:33:53.381Z" title="更新于 2023-11-20 13:33:53">2023-11-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/">个人项目</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Web前端开发大作业-仿Bilibili"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>网站基于Html5、CSS3和原生JavaScript实现，参照Bilibili的设计，并包含各种常用元素、样式、交互功能，内容丰富，可供前端入门人员参照学习。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/S-Lucien/imitate-Bilibili/">Github</a></p>
+<h3 id="点击体验"><a href="#点击体验" class="headerlink" title="点击体验"></a><a target="_blank" rel="noopener" href="https://bilibili.ripplesu.top/">点击体验</a></h3><h2 id="网站项目说明"><a href="#网站项目说明" class="headerlink" title="网站项目说明"></a>网站项目说明</h2><p>网站基于Html5、CSS3和原生JavaScript实现，参照Bilibili的设计，并包含各种常用元素、样式、交互功能，内容丰富，可供前端入门人员参照学习。</p>
+<p>网站整体结构如下：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/bba3c39fe49af6250cd8a1930cadd4f1_repeat_1700451584402__930069.png"></p>
+<h2 id="网站各项目详细说明"><a href="#网站各项目详细说明" class="headerlink" title="网站各项目详细说明"></a>网站各项目详细说明</h2><h3 id="网站内容完整性"><a href="#网站内容完整性" class="headerlink" title="网站内容完整性"></a>网站内容完整性</h3><h4 id="1-1网页完整性"><a href="#1-1网页完整性" class="headerlink" title="1.1网页完整性"></a>1.1网页完整性</h4><p>登录页面：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/9f8bde50ecfb37b36f94a1ca6f722f4c_repeat_1700451620475__421375.png"></p>
+<p>联系页面：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/7d2cf85da3d26f3cb1f9ebecf275e249_repeat_1700451625107__253038.png"></p>
+<p>主页面：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/c4ac424428dfa4c6bc46ded48062978b_repeat_1700451690639__449217.png"></p>
+<p>分类展示页面-番剧：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/4279258fa29aafe9d582b1845f3bfb32_repeat_1700451700036__290303.png"></p>
+<p>分类展示页面-游戏中心：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/3d6359a1d82bd1568f2e6e51fd038ea5_repeat_1700451732804__941288.png"></p>
+<p>视频详情页：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/41f9868da9d41f4ca2ed1bd1c5bd3b92_repeat_1700451702838__893012.png"></p>
+<h4 id="主页完整性"><a href="#主页完整性" class="headerlink" title="主页完整性"></a>主页完整性</h4><p>页眉区：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/7d5ed2ff21ad63d683a7f66564cd00a8_repeat_1700451642815__461312.png"></p>
+<p>Banner广告区：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/689d1d2695ac02a5cedffafaafee3f02_repeat_1700451636485__360631.jpeg"></p>
+<p>正文区：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/3e113b0504100a1bd5c40602b9f635fe_repeat_1700451649374__063897.png"></p>
+<p>副栏区：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/6c6393167b8565e22b9520da868cf9aa_repeat_1700451646113__628977.png"></p>
+<p>页脚区：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/foot_repeat_1700451647615__232188.png"></p>
+<h4 id="网页元素多样性"><a href="#网页元素多样性" class="headerlink" title="网页元素多样性"></a>网页元素多样性</h4><p>列表（ul）：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/81875643b7e7ce7bc8e31646af2d8063_repeat_1700451647737__337786.png"></p>
+<p>图文混排：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/0056f155b3627c5553f83ee80f00ada8_repeat_1700451712716__668055.png"></p>
+<p>视频：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/9ee41b829f5f4633891ad3d4c2b60f08_repeat_1700451653694__511317.png"></p>
+<p>Canvas：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/57c611fef491a2d5ab5b441f03ca5704_repeat_1700451652710__794414.png"></p>
+<h3 id="网站样式设计说明"><a href="#网站样式设计说明" class="headerlink" title="网站样式设计说明"></a>网站样式设计说明</h3><h4 id="2-1整体设计"><a href="#2-1整体设计" class="headerlink" title="2.1整体设计"></a>2.1整体设计</h4><p>Dilidili整体以白色为主色调，纯净、简约兼容性好，有效突出网站内容。各个分页面布局与边距等设计不尽相同，以下一一介绍。</p>
+<p>主页：</p>
+<p>主页整体分为三个部分：header、main和footer。</p>
+<p>Header部分包括导航栏、banner以及channel三个部分。导航栏整体采用flex布局，左边导航链接部分为横向排列的ul列表，紧接着是搜索框，最右边的用户部分采用绝对位置布局。背景为banner。Channel部分也采用flex布局，外边距与内边距为55px左右，使channel部分整体位于中央，排列紧凑。</p>
+<p>Main部分宽1400px，左右内边距56px，包含推荐区、推广区、直播区、番剧区、漫画区、游戏区六大模块。这六个模块均采用grid布局，模块间存在56px的下内边距。具体行列数各分区略有不同。以下以推荐区与直播区为例介绍。</p>
+<p>推荐区分为2行5列共10个小网格，其中左边为切换广告，占2行2列4个网格；右边为6个推荐视频，每个视频占1个小网格。直播区整体采用网格布局，分为左右两部分共5列，其中左侧推荐直播占4列，右边排行榜部分占1列。推荐直播内部又分为2行4列共8个小网格，每个推荐主播占1个网格。小网格间上下边距为6px，左右边距为12px。排行榜部分分为上下两块，上方为标题即“排行榜”，下方采用纵向列表布局。列表详细内容在元素样式中说明。其他模块布局与直播区类似，此处不再赘述。</p>
+<p>Footer部分较为简单，主要由文字构成，包含联系我们等链接以及版权说明等，文字局中布局。左右外边距为15px，上下内边距为30px。</p>
+<p>分页面-番剧：</p>
+<p>除导航栏外，页面整体分为上下两块，采用流式布局。上方为banner区，采用justify-content属性将其居中，宽度为整个页面的75%。下方内容区同样采用flex布局，上边距20px与banner区隔开，宽度与其保持一致。内容区又分为左右两部分，均采用float：left布局。</p>
+<p>分页面-游戏中心：</p>
+<p>页面同样分为上下两块，上方banner区采用默认布局（div block），宽度100%，高度为固定值，无左右边距，详细内容将在后面介绍。下方同样为block布局，宽度为固定值1160px，左右外边距为auto，使其自动居于中央。</p>
+<p>视频详情页：</p>
+<p>页面分为左右两块，用一个流式布局的div包含，并设置justify-content属性为center使左右两部分相中靠拢，从而无需设置左右边距。左边为视频区域，右边为up主信息与推荐视频，整体都采用默认的block布局，从上而下排列。</p>
+<p>联系我们页面：</p>
+<p>该页面较为简单，仅包含导航栏、一张背景图片与信息表单，表单使用绝对位置居于页面中央，表单内每行均为block布局，整体文字靠左排列。</p>
+<p>收藏页面：</p>
+<p>整体分为上下两块，采用flex布局并设置justify-content属性使页面元素居中。上方图片区域采用grid布局，2行2列共4个小网格，每张图片占一个网格。下方分页切换控件采用绝对位置布局，使其位于图片下方、居中排列。</p>
+<h4 id="2-2-元素样式设计"><a href="#2-2-元素样式设计" class="headerlink" title="2.2 元素样式设计"></a>2.2 元素样式设计</h4><p>导航链接样式设计：</p>
+<p>导航栏分为左边分类页面导航链接、中间搜索框和右边用户区三个部分，各个部分均为绝对位置布局，不含背景图片高度60px，浮动于页面最上方。</p>
+<p>左边的分类链接区为横向排列的ul列表，采用flex布局，列表元素间左内边距10px。当鼠标悬停在“番剧”和“直播”两个链接上时将出现下拉框。下拉框宽500px，高300px，采用flex布局，分为左右两块，中间用浅灰色线隔开。左边宽350px，内边距20px，采用grid布局，共2列2行，每张图片及其标题占1个网格；右边为列表，包含若干项。</p>
+<p>中间搜索框宽446px，高36px，背景为白色，紧接着是浅灰色的搜索button。右边用户区由登录、注册和投稿三个链接构成，内部采用flex布局；登录后则变为用户头像、收藏和投稿三个部分。其中投稿页面尚未实装。</p>
+<p>当滚轮位于最上方时，导航栏内文字颜色为白色，背景为透明，与背景图融为一体。滚轮向下移动离开页面最上方时，导航栏内文字颜色变为黑色，背景颜色变为浅灰色，浮于页面最上层。如下图所示：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/e922333501d428e11f83a4a7dc1962dc_repeat_1700451717132__140672.png"></p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/f4ca83d85a2e94542df2c731c98f9c50_repeat_1700451655048__297786.png"></p>
+<p>图 22.1 导航栏样式</p>
+<p>广告样式设计：</p>
+<p>Dilidili共有三种广告样式，此处只介绍第二种。效果如下图所示：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/c3af6848c2a01dae97ff996a59387df0_repeat_1700451657204__233038.png"></p>
+<p>整个banner区域采用flex布局，并设置justify-content属性为center，使其居中。Banner宽度为75%，内部使用dl列表，并设置position属性为relative。列表内含dt和dd两部分。</p>
+<p>dt部分即为右下角的切换控件，内含4个anchor元素，每个anchor元素由一张小封面构成，宽64px，高48px，右边距5px，边框2px 白色。当鼠标悬停在小封面上方时，其边框颜色变为红色，且自动切换为对应的图片。</p>
+<p>dd部分由图片及其左下角的介绍构成。图片铺满整个banner区域，位于底层。左下角介绍部分文字为白色，字体大小18px，为避免图片颜色干扰，对文字的背景设置了由黑到白的渐变色，并设置了背景虚化。</p>
+<p>图文混排样式设计：</p>
+<p>以如下样式为例介绍：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/4ccf4c040e29b58d6426bda57b634402_repeat_1700451660137__357274.png"></p>
+<p>区域顶部为高1px的灰色分割线，下方内容区与其间距为16px。内容区分为左右两部分。左边为宽高固定的图片，图片包含于anchor中。为anchor设置向左浮动（float：left）属性，使文字可以居于图片右方。右边文字自上而下分为5个小块。除了简介部分为detail外，其他均包含于div中。各个部分的文字在颜色、大小、字宽、行高、内外边距等方面各有差异，详情不再赘述。</p>
+<h3 id="网站交互功能"><a href="#网站交互功能" class="headerlink" title="网站交互功能"></a>网站交互功能</h3><h4 id="3-1-数据验证"><a href="#3-1-数据验证" class="headerlink" title="3.1 数据验证"></a>3.1 数据验证</h4><p>登录页使用JavaScript对输入的密码进行验证，密码为‘123456’时即可登陆成功。</p>
+<p>联系我们页面主要通过input标签的pattern属性对姓名和手机号码进行校验。</p>
+<p>其中姓名校验方式如下，其含义为2~4个中文字符：</p>
+<p>pattern&#x3D;”^[\u4e00-\u9fa5][\u4e00-\u9fa5]{0,2}[\u4e00-\u9fa5]$“</p>
+<p>手机号校验方式如下，根据各个运营商的号码区段进行校验，最长11位：</p>
+<p>pattern&#x3D;”^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$“ maxlength&#x3D;“11”</p>
+<h4 id="3-2-用户状态"><a href="#3-2-用户状态" class="headerlink" title="3.2 用户状态"></a>3.2 用户状态</h4><p>登录后，导航栏右边用户区发生变化，显示用户的用户名、头像、收藏页链接。如下图所示：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/15f3651cc1c76375874228a9730a2c25_repeat_1700451662413__867613.png"> –&gt; <img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/ff1476899f4cd976d7d02494737a66c9_repeat_1700451665964__027617.png"></p>
+<p>登陆成功时，通过js将用户名存入sessionStorage中，跳转到各个页面时，从sessionStorage中读出用户名并将其作为文本替换原来的‘登录’；将‘注册’元素隐藏并显示‘收藏’。</p>
+<h4 id="3-3-图片切换"><a href="#3-3-图片切换" class="headerlink" title="3.3 图片切换"></a>3.3 图片切换</h4><p>本网站中共有三种图片切换效果，此处介绍较为简单的两种，分别位于主页和番剧页面。</p>
+<p>广告主体由一个img元素和一个span元素组成，分别用于显示图片及其标题。另外在右下方设置四个控件，用于图片切换。</p>
+<p>首先定义iCount标记当前图片id，定义自动切换函数carousel，通过getElementById获取存放图片的img元素和存放标题的span元素，并将其内图片和标题设置为下一张图片，然后使iCount++。如果iCount&gt;图片数就将其置为1，循环播放图片。通过setInterval函数设置自动切换时间为2s。</p>
+<p>然后定义change函数，其功能是根据用户指定的控件切换图片，并更改控件的样式以突出当前播放图片的位置。为每一个空间添加onclick或onmouseover事件，事件内调用change函数，并将iCount修改为对应值。</p>
+<h4 id="3-4-图形绘制"><a href="#3-4-图形绘制" class="headerlink" title="3.4 图形绘制"></a>3.4 图形绘制</h4><p>利用canvas实现视频截图功能。首先需要为canvas设置width和height属性指定画布的大小。然后为截图按钮添加单击事件：单击后，首先获取视频元素和canvas元素，通过canvas.getContext（‘2d’）函数获取canvas对象，然后用其内置的drawImage函数指定图片来源，并指定绘制图片的位置和宽高，就可以将图片绘制在canvas元素内。</p>
+<h4 id="3-5-浮动"><a href="#3-5-浮动" class="headerlink" title="3.5 浮动"></a>3.5 浮动</h4><p>为导航栏设置浮动效果。首先需将导航栏设置为fixed布局。然后通过window.onscroll方法为滚动条添加事件：通过id获取导航栏元素。当滚动条移动时，通过document.documentElement.scrollTop方法获取滚动条与页面顶端的距离，当滚动条不处于页面顶端时，将导航栏背景颜色设置为浅灰色，并将导航栏内所有字体颜色修改为黑色，避免文字溶于背景。当滚轮回到页面顶端时，再将导航栏背景修改为transparent，其内所有文字颜色修改回白色。</p>
+<h4 id="3-6-拖放"><a href="#3-6-拖放" class="headerlink" title="3.6 拖放"></a>3.6 拖放</h4><p>首先为3.4中的canvas元素添加dragstart监听事件，拖放开始时通过事件的dataTransfer对象的setData方法将canvas中数据以‘text&#x2F;html’形式存入。</p>
+<p>然后为导航栏中的‘收藏’元素添加drop监听事件：通过dataTransfer的getData方法获取存入的数据，并将数据以JSON对象的形式存入localStorage中，以便后续收藏页面加载数据。详情将在后面介绍。</p>
+<p>此外还需将要拖放的元素的dragable属性设置为true，通过preventDefault方法取消默认的ondragover和ondrop方法。</p>
+<h4 id="3-7分页导航"><a href="#3-7分页导航" class="headerlink" title="3.7分页导航"></a>3.7分页导航</h4><p>主要实现收藏页面的分页功能。3.6中提到将截图拖放至‘收藏’处即可将截图存入localStorage，此处将所有图片从localStorage中读出，然后按4张图片一页设置若干分页，并按照页面数添加上一页、下一页以及对应若干个分页按钮。定义page变量标记当前分页号。然后使用getElementByName方法获取所有分页按钮（按钮具有相同的名字，其在数组的下标值即为分页号），然后通过IIFE（Immediately Invoked Function Expression，此处用于解决循环内添加事件不能正常执行的问题）为所有按钮添加单击事件：改变按钮边框以突出当前分页号，并通过Switch方法更换分页。更换方法为：将当前分页的display属性设置为none，将其隐藏，然后显示要切换的分页。</p>
+<p>显示效果如下：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/c781243849dd8e7e821ab2ba257c7322_repeat_1700451719513__680381.png"></p>
+<h3 id="特色"><a href="#特色" class="headerlink" title="特色"></a>特色</h3><h4 id="4-1-设计亮点"><a href="#4-1-设计亮点" class="headerlink" title="4.1 设计亮点"></a>4.1 设计亮点</h4><p>广告切换效果：</p>
+<p>游戏中心页面广告设计如下图所示：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/5a5b31bdcdc1d0357ab8ba1157478763_repeat_1700451670474__526856.jpeg"></p>
+<p>广告由三张图片构成，为每张图片设置不同的z-index值，并分别调整顶层于底层图片的box-shadow与brightness值，然后利用translateX调整三张图片在X轴的偏移量使看起来其层次分明。</p>
+<p>自顶向下图片的z-index值分别为989、979、969，当图片切换时，三张图片逆时针转动，顶层图片宽高、亮度变为原来的75%，z-index值变为979，通过调整translateX值使其向左移动，并设置transition属性为0.3s，即在0.3s时间完成切换，从而表现出动态的切换效果。</p>
+<h4 id="4-2技术亮点"><a href="#4-2技术亮点" class="headerlink" title="4.2技术亮点"></a>4.2技术亮点</h4><p>伸缩盒子：效果如下：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/55b79a510e2f8964f6919183a89f905c_repeat_1700451673163__032968.jpeg"><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/203bc285b15996a20433a01e122deea3_repeat_1700451675227__737427.png"></p>
+<p>当鼠标悬停在区域上时，内部的简介‘弹出’，并设置其边框的阴影效果，表现出伸缩的效果。具体实现为：初始时将简介部分高度设置为0，整个标签设置上边距16px；当鼠标悬停时，将简介部分高度设置为16px，并将上边距调整为0、设置阴影效果，使得交互效果更加明显。</p>
+<p>简易评论区：</p>
+<p>效果如下：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/e7fdbcbbbf2ec583f2d663ef31133931_repeat_1700451677669__295069.png"></p>
+<p>为‘发布’按钮添加单击事件：判断输入框内是否为空，如果为空则用focus方法使输入框成为焦点；否则调用loadStorage方法，将评论内容及评论时间以JSON格式存入localStorage。该方法在页面加载完毕或点击发布后，从localStorage中读出所有评论，然后封装在div元素中，通过innerHtml方法将所有评论加载到评论区。</p>
+<p>截图收藏：</p>
+<p>前置的截图、拖放、分页功能已经在上面阐述过，此处不再赘述。另外要提的一点是，在canvas拖放到收藏位置时，使用canvas的toDataUrl方法将图片以url形式封装于img标签中，然后与收藏时间一起添加进localStorage的pictures中。这里主要介绍收藏页图片的加载与删除。</p>
+<p>定义count变量标记分页数，然后从localStorage中将所有存入的图片读出，按照4张图片一个分页的方式动态设置分页与分页导航按钮（页面主体为网格布局，2行2列），并为每张图片设置一个删除按钮。然后通过getElementByName方法获取按钮数组，并为所有分页导航按钮与删除按钮添加单击事件。当点击删除后，由于删除按钮在数组中的index与图片的index对应，单击后调用splice方法将图片从图片数组中删除，并更新到localStorage中。然后调用reload方法刷新页面，即可实现删除功能。</p>
+<p>页面效果如下，详情可打开页面体验：</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/8ab2e2f1f274dfeffbb9ea0af5efe74d_repeat_1700451680969__216565.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://blog.ripplesu.top">RippleSu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://blog.ripplesu.top/2022/06/05/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/">http://blog.ripplesu.top/2022/06/05/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.ripplesu.top" target="_blank">RippleSu's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%89%8D%E7%AB%AF/">前端</a><a class="post-meta__tags" href="/tags/Html/">Html</a><a class="post-meta__tags" href="/tags/CSS/">CSS</a><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript</a></div><div class="post_share"><div class="social-share" data-image="http://img.ripplesu.top/random?dir=竖屏&amp;Web前端开发大作业-仿Bilibili" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2023/02/07/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%A4%8D%E4%B9%A0/" title="软件工程复习"><img class="cover" src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;软件工程复习" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">软件工程复习</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="http://121.41.55.70:9000/image-lib/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">RippleSu</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/S-Lucien" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:syp@ripplesu.top" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E4%BD%93%E9%AA%8C"><span class="toc-number">1.</span> <span class="toc-text">点击体验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E"><span class="toc-number"></span> <span class="toc-text">网站项目说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E5%90%84%E9%A1%B9%E7%9B%AE%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E"><span class="toc-number"></span> <span class="toc-text">网站各项目详细说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E5%86%85%E5%AE%B9%E5%AE%8C%E6%95%B4%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">网站内容完整性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1%E7%BD%91%E9%A1%B5%E5%AE%8C%E6%95%B4%E6%80%A7"><span class="toc-number">1.1.</span> <span class="toc-text">1.1网页完整性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E9%A1%B5%E5%AE%8C%E6%95%B4%E6%80%A7"><span class="toc-number">1.2.</span> <span class="toc-text">主页完整性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E9%A1%B5%E5%85%83%E7%B4%A0%E5%A4%9A%E6%A0%B7%E6%80%A7"><span class="toc-number">1.3.</span> <span class="toc-text">网页元素多样性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E6%A0%B7%E5%BC%8F%E8%AE%BE%E8%AE%A1%E8%AF%B4%E6%98%8E"><span class="toc-number">2.</span> <span class="toc-text">网站样式设计说明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1%E6%95%B4%E4%BD%93%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.1.</span> <span class="toc-text">2.1整体设计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E5%85%83%E7%B4%A0%E6%A0%B7%E5%BC%8F%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 元素样式设计</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E4%BA%A4%E4%BA%92%E5%8A%9F%E8%83%BD"><span class="toc-number">3.</span> <span class="toc-text">网站交互功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 数据验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E7%94%A8%E6%88%B7%E7%8A%B6%E6%80%81"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 用户状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E5%9B%BE%E7%89%87%E5%88%87%E6%8D%A2"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 图片切换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-%E5%9B%BE%E5%BD%A2%E7%BB%98%E5%88%B6"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 图形绘制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-%E6%B5%AE%E5%8A%A8"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 浮动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-%E6%8B%96%E6%94%BE"><span class="toc-number">3.6.</span> <span class="toc-text">3.6 拖放</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-7%E5%88%86%E9%A1%B5%E5%AF%BC%E8%88%AA"><span class="toc-number">3.7.</span> <span class="toc-text">3.7分页导航</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E8%89%B2"><span class="toc-number">4.</span> <span class="toc-text">特色</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-%E8%AE%BE%E8%AE%A1%E4%BA%AE%E7%82%B9"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 设计亮点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2%E6%8A%80%E6%9C%AF%E4%BA%AE%E7%82%B9"><span class="toc-number">4.2.</span> <span class="toc-text">4.2技术亮点</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/11/18/GitHub%20Pages%E9%85%8D%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/" title="GitHub Pages配置自定义域名并利用Cloudflare CDN加速"><img src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;GitHub Pages配置自定义域名并利用Cloudflare CDN加速" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="GitHub Pages配置自定义域名并利用Cloudflare CDN加速"/></a><div class="content"><a class="title" href="/2023/11/18/GitHub%20Pages%E9%85%8D%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/" title="GitHub Pages配置自定义域名并利用Cloudflare CDN加速">GitHub Pages配置自定义域名并利用Cloudflare CDN加速</a><time datetime="2023-11-18T12:44:00.000Z" title="发表于 2023-11-18 20:44:00">2023-11-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/16/%E5%B7%A5%E7%A8%8B%E7%BB%8F%E6%B5%8E%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" title="工程经济期末复习"><img src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;工程经济期末复习" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="工程经济期末复习"/></a><div class="content"><a class="title" href="/2023/06/16/%E5%B7%A5%E7%A8%8B%E7%BB%8F%E6%B5%8E%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" title="工程经济期末复习">工程经济期末复习</a><time datetime="2023-06-16T06:44:08.000Z" title="发表于 2023-06-16 14:44:08">2023-06-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/22/%E5%9F%BA%E4%BA%8Ecommons-pool2%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AF%B9%E8%B1%A1%E6%B1%A0/" title="基于commons-pool2自定义对象池"><img src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;基于commons-pool2自定义对象池" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于commons-pool2自定义对象池"/></a><div class="content"><a class="title" href="/2023/03/22/%E5%9F%BA%E4%BA%8Ecommons-pool2%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AF%B9%E8%B1%A1%E6%B1%A0/" title="基于commons-pool2自定义对象池">基于commons-pool2自定义对象池</a><time datetime="2023-03-22T14:29:29.000Z" title="发表于 2023-03-22 22:29:29">2023-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/10/Hadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" title="Hadoop伪分布式集群搭建"><img src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;Hadoop伪分布式集群搭建" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hadoop伪分布式集群搭建"/></a><div class="content"><a class="title" href="/2023/03/10/Hadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" title="Hadoop伪分布式集群搭建">Hadoop伪分布式集群搭建</a><time datetime="2023-03-10T10:41:47.000Z" title="发表于 2023-03-10 18:41:47">2023-03-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/27/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="git常用命令"><img src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;git常用命令" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="git常用命令"/></a><div class="content"><a class="title" href="/2023/02/27/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="git常用命令">git常用命令</a><time datetime="2023-02-27T10:03:53.000Z" title="发表于 2023-02-27 18:03:53">2023-02-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By RippleSu</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const disqus_config = function () {
+    this.page.url = 'http://blog.ripplesu.top/2022/06/05/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/'
+    this.page.identifier = '/2022/06/05/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%BB%BFBilibili/'
+    this.page.title = 'Web前端开发大作业-仿Bilibili'
+  }
+
+  const disqusReset = () => {
+    window.DISQUS && window.DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  btf.addGlobalFn('themeChange', disqusReset, 'disqus')
+
+  const loadDisqus = () =>{
+    if (window.DISQUS) disqusReset()
+    else {
+      const script = document.createElement('script')
+      script.src = 'https://.disqus.com/embed.js'
+      script.setAttribute('data-timestamp', +new Date())
+      document.head.appendChild(script)
+    }
+  }
+
+  const getCount = async() => {
+    try {
+      const eleGroup = document.querySelector('#post-meta .disqus-comment-count')
+      if (!eleGroup) return
+      const cleanedLinks = eleGroup.href.replace(/#post-comment$/, '')
+
+      const res = await fetch(`https://disqus.com/api/3.0/threads/set.json?forum=&api_key=&thread:link=${cleanedLinks}`,{
+        method: 'GET'
+      })
+      const result = await res.json()
+
+      const count = result.response.length ? result.response[0].posts : 0
+      eleGroup.textContent = count
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  if ('Valine' === 'Disqus' || !false) {
+    if (false) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+    else {
+      loadDisqus()
+      
+    }
+  } else {
+    window.loadOtherComment = loadDisqus
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>

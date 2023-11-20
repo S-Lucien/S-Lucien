@@ -1,0 +1,691 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>非关系式数据库期末复习 | RippleSu's Blog</title><meta name="author" content="RippleSu"><meta name="copyright" content="RippleSu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="非关系式数据库产生的原因关系式数据库局限性：高可用、高并发、高性能 互联网环境下：数据量极大、访问量大、需求千变万化要求数据库系统有高可伸缩性、低成本开销、高度的灵活性和高度的可用性 可伸缩性是指有效应对负载变化的能力。 横向扩展：添加服务器；纵向扩展：升级服务器，配置更多的处理器、内存、网络资源。 分布式数据库集群架构集群（cluster）是互相连接的多个独立计算 机的集合，这些计算机可以是单机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="非关系式数据库期末复习">
+<meta property="og:url" content="http://blog.ripplesu.top/2023/02/23/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/index.html">
+<meta property="og:site_name" content="RippleSu&#39;s Blog">
+<meta property="og:description" content="非关系式数据库产生的原因关系式数据库局限性：高可用、高并发、高性能 互联网环境下：数据量极大、访问量大、需求千变万化要求数据库系统有高可伸缩性、低成本开销、高度的灵活性和高度的可用性 可伸缩性是指有效应对负载变化的能力。 横向扩展：添加服务器；纵向扩展：升级服务器，配置更多的处理器、内存、网络资源。 分布式数据库集群架构集群（cluster）是互相连接的多个独立计算 机的集合，这些计算机可以是单机">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.ripplesu.top/random?dir=%E7%AB%96%E5%B1%8F&%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0">
+<meta property="article:published_time" content="2023-02-23T08:43:02.000Z">
+<meta property="article:modified_time" content="2023-11-20T05:55:58.870Z">
+<meta property="article:author" content="RippleSu">
+<meta property="article:tag" content="NoSQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.ripplesu.top/random?dir=%E7%AB%96%E5%B1%8F&%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://blog.ripplesu.top/2023/02/23/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: RippleSu","link":"链接: ","source":"来源: RippleSu's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '非关系式数据库期末复习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-20 13:55:58'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="http://121.41.55.70:9000/image-lib/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('http://img.ripplesu.top/random?dir=横屏')"><nav id="nav"><span id="blog-info"><a href="/" title="RippleSu's Blog"><span class="site-name">RippleSu's Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">非关系式数据库期末复习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-23T08:43:02.000Z" title="发表于 2023-02-23 16:43:02">2023-02-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-20T05:55:58.870Z" title="更新于 2023-11-20 13:55:58">2023-11-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">学习总结</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">9.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>30分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="非关系式数据库期末复习"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="非关系式数据库产生的原因"><a href="#非关系式数据库产生的原因" class="headerlink" title="非关系式数据库产生的原因"></a>非关系式数据库产生的原因</h3><p>关系式数据库局限性：高可用、高并发、高性能</p>
+<h4 id="互联网环境下：数据量极大、访问量大、需求千变万化"><a href="#互联网环境下：数据量极大、访问量大、需求千变万化" class="headerlink" title="互联网环境下：数据量极大、访问量大、需求千变万化"></a>互联网环境下：数据量极大、访问量大、需求千变万化</h4><p>要求数据库系统有<strong>高可伸缩性</strong>、<strong>低成本开销</strong>、<strong>高度的灵活性</strong>和<strong>高度的可用性</strong></p>
+<p><strong>可伸缩性</strong>是指有效应对负载变化的能力。</p>
+<p>横向扩展：添加服务器；纵向扩展：升级服务器，配置更多的处理器、内存、网络资源。</p>
+<h3 id="分布式数据库"><a href="#分布式数据库" class="headerlink" title="分布式数据库"></a>分布式数据库</h3><h4 id="集群架构"><a href="#集群架构" class="headerlink" title="集群架构"></a>集群架构</h4><p>集群（cluster）是互相连接的多个独立计算 机的集合，这些计算机可以是单机或多处理器系统（PC、工作站或SMP），每个结点都有自己的存储器、I&#x2F;O设备和操作系统，对用户来说是一个单一的系统，它可以提供低价高效的高性能环境和快速可靠的服务。</p>
+<h4 id="分布式数据库管理的任务"><a href="#分布式数据库管理的任务" class="headerlink" title="分布式数据库管理的任务"></a>分布式数据库管理的任务</h4><p><strong>①</strong>持久的存储数据</p>
+<p>为保证数据可用性，一份数据有多个副本。</p>
+<p><strong>②</strong>维护数据一致性</p>
+<p>用户所查询的数据与数据库中实际存储的数据的一致性， 以及不同数据副本之间的一致性。</p>
+<p>强一致性：</p>
+<p>任何时刻所有的用户查询到的都是最近一次成功更新的数据。这是要求</p>
+<p>最高的标准，也是最难实现的，关系型数据库采用该标准。</p>
+<p>弱一致性：</p>
+<p>某个用户更新了某数据副本，但是系统不能保证后面的用户能够读取到</p>
+<p>最新的值。</p>
+<p><strong>最终一致性</strong>：</p>
+<p>最终一致性是弱一致性的一种特例。某用户更新了副本的数据，如果没有其他用户更新这个副本的数据，系统最终一定能够保证后续用户能够读取到该用户写的最新值。最终一致性存在一个不一致性的窗口，也就是用户写入数据到其他用户读取所写的新值所用的时间。</p>
+<p>a) 因果一致性</p>
+<p>如果用户A通知用户B它已更新了一个数据项，那么用户 B的后续访问将返回更新后的值，且下一次写入将保证取代前一次写入。与用户A无因果关系的用户C的访问遵守一般的 最终一致性规则。</p>
+<p>b) 读写一致性</p>
+<p>当用户A自己更新一个数据项之后，它总是访问到更新过的值，绝不会看到旧值。这是因果一致性模型的一个特例。</p>
+<p>c) 会话一致性</p>
+<p>把访问系统的所有用户放到会话的上下文中，只要会 话还存在，系统就保证读写一致性。如果由于某些失败情 形令会话终止，就要建立新的会话，而且系统保证不会延 续到新的会话。</p>
+<p>d) 单调读一致性</p>
+<p>如果用户已经看到过数据对象的某个值，那么任何后续 访问都不会返回在那个值之前的值。</p>
+<p>e) 单调写一致性</p>
+<p>系统保证来自同一个用户的写操作按顺序执行。</p>
+<p><strong>③</strong>保证数据可用性</p>
+<p>数据库可用性指数据库应该随时可供使用。一般设置主服务器和备份服务器，通过两阶段提交（先写主，在写备份）策略保证数据一致性。</p>
+<h3 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h3><p>在一个<strong>分布式系统</strong>中，一致性（Consistency） 、可用性（Availability）、分区容错性（Partition tolerance）三个基本需求最多只能同时满足两个， 不可能三者兼顾。</p>
+<p>一致性（C） ：各服务器中的数据副本要彼此相同，当一个节点的数据更新完成后，要求其他副 本的数据与此相同。</p>
+<p>可用性（A）：系统能够持续不断地提供相应服务，响应任意的查询请求。</p>
+<p>分区容错性（P）： 由于网络故障，集群被切分成了若干个孤立的区域，这就是分区。分区容错性要求各分区之间虽然不能够通信，但各分区依然可以提供数据服务。一般地，分布式数据库必须尽力在网络发生故障的情况下继续工作，因此分区容错性是<strong>基本要求</strong>。</p>
+<p>CA：SQLServer、MySql</p>
+<p>AP：Cassandra、CouchDB、Riak</p>
+<p>CP：Neo4j、MongoDB、Redis、HBASE、Bigtable</p>
+<h3 id="ACID原理"><a href="#ACID原理" class="headerlink" title="ACID原理"></a>ACID原理</h3><p>ACID是指<strong>事务</strong>必须具备的四个特性:</p>
+<p>(1)原子性(Atomicity)：每个事务是不可分割的数据库逻辑工作单位。</p>
+<p>(2)一致性(Consistency)：事务的执行结果必须使数据库从一个一致性状态变到另一个一致性状态。</p>
+<p>(3)隔离性(Isolation)：并发执行的各个事务之间不能相互干扰。</p>
+<p>(4)持续性(Durability)：持续性也称为永久性，指一个事务一旦提交，它对数据库中数据的改变应该是永久性的。</p>
+<h3 id="BASE原理"><a href="#BASE原理" class="headerlink" title="BASE原理"></a>BASE原理</h3><p>BASE原理与ACID原理不同，它满足CAP原理，通过牺牲强一致性获得可用性，通过达到<strong>最终一致性</strong>来尽量满足业务的绝大多数需求，是NoSQL的性质：</p>
+<p>• BA：Basically Available 基本可用：如果分布式系统中的某些服务器出现了故障，其他服务器仍然可以继续提供服务。</p>
+<p>• S：Soft state 软状态，数据库中的数据最终会被新值所覆盖。</p>
+<p>• E：Eventually consistency 最终一致性，数据副本有可能在短时间内出现彼此不一致的现象，但最终将完成所有副本的更新，保持一致性。</p>
+<h3 id="非关系式数据库基本特征"><a href="#非关系式数据库基本特征" class="headerlink" title="非关系式数据库基本特征"></a>非关系式数据库基本特征</h3><p>1）不需要预定义模式：每条记录都可能有不同的属性和格式，其模式在插入数据时动态定义。</p>
+<p>2）弹性可扩展：可以动态增加或者删除集群节点，数据可自行迁移。</p>
+<p>3）数据分区存放：将数据进行分区之后存储在多个节点上，节点间自动进行数据复制，制作多个数据副本。</p>
+<p>4）异步复制数据：将数据先写入一个节点，再根据数据备份的数量复制数据，这样可以尽快地写入一个节点。</p>
+<p>5）BASE：相对于事务严格的ACID特性，NoSQL数据库保证的是BASE特性。</p>
+<p>非关系式数据库适用的范围： 1）数据模型比较简单； 2）需要灵活性更强的集群系统； 3）关注更高的性能； 4）不需要保证强一致性。</p>
+<h2 id="键值数据库"><a href="#键值数据库" class="headerlink" title="键值数据库"></a>键值数据库</h2><h3 id="键值数据库的数据结构"><a href="#键值数据库的数据结构" class="headerlink" title="键值数据库的数据结构"></a>键值数据库的数据结构</h3><p>键值数据库根据键名（Key）来读写键值（Value），其采用的数据模型是关联数组。</p>
+<p>关联数组（associative array）是和普通数组类似的一种数据结构，但与数组相比具有两个不同的特点：</p>
+<p>（1） 关联数组的每个元素的数据类型可以不同，如其中的元素可以分别是整数、浮点数、字符、列表、对象等；</p>
+<p>（2） 关联数组的下标不仅可以是整数，还可以是字符串。</p>
+<p>也就是说，关联数组是数组概念的泛化，它以唯一的标识符作为下标的有序列表，这个下标称为键（Key），而数组元素称为值（Value）。关联数组也被称为字典、映射、哈希或者符号表等，在键值数据库中被称为键值对。</p>
+<p>键值数据库的数据结构就是<strong>关联数组</strong>，也称为Hash表，形式上是一个键值对（Key，Value）。</p>
+<p>– 键（Key）：用来查询值的唯一标识符。</p>
+<p>– 值（Value）：是一个实例，与唯一的Key相关联，可以是任意的数据类型。</p>
+<p>– 命名空间键(namespace):键值对构成的集合，也称为桶（bucket）或数据库(database)。</p>
+<p>• 同一个命名空间中的键不允许相同，不同命名空间中的键可以相同。</p>
+<p>– 分区：根据键名，把数据分割成不同的单元，存储在集群中的不同服务器上，实现负载均衡。</p>
+<h3 id="键的设计与分区"><a href="#键的设计与分区" class="headerlink" title="键的设计与分区"></a>键的设计与分区</h3><p><strong>键</strong></p>
+<p>键命名一般方法： 实体名：实体标识符：实体属性</p>
+<p><strong>分区</strong></p>
+<p>集群中的一组或一个服务器称为集群的分区。 目标：尽可能将键值对均衡地分配给集群中的不同分区。</p>
+<p>一般以“键”作为分区的依据，通过所定义的Hash哈希函数直接将键值对映射到相应分区。</p>
+<p>如果两个不同的键产生了相同的哈希值，则称为<strong>碰撞</strong>。 解决的基本方法是在对应的存储空间中另外设置一个列表，类似于一个链表。</p>
+<p>如果某个键无法实现<strong>负载均衡</strong>，可以采取的办法： 另选合适的分区键，使得分区结果更加均衡；改变哈希分区算法。</p>
+<p><strong>命名空间</strong></p>
+<p>由互不相同的<strong>键值对</strong>所构成<strong>集合</strong>称为命名空间，也称为桶。同一个命名空间中的键互不相同；不同命名空间中的键可以相同。</p>
+<p><strong>无纲要模式</strong></p>
+<p>对于关系型数据库，一般需要先构建数据库纲要 （<strong>数据库结构</strong>），然后再添加数据。 • 在键值数据库中，则采用无纲要模型： – 不需要在添加数据之前定义所有的键，也无需 指定值的数据类型； – 可以任意的修改数据。</p>
+<h3 id="键值数据库特点"><a href="#键值数据库特点" class="headerlink" title="键值数据库特点"></a>键值数据库特点</h3><p>数据模型简单-键值对、速度快-缓存、易缩放-动态增减结点</p>
+<p>局限性：只能通过键来查询数据；不支持查询某个范围的值；不支持SQL式的标准查询语言。</p>
+<h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>String 是 Redis 最基本的数据类型，一个 key 对应一个 value，可以存储任何数据，最大能存储 512MB。数值型数据作为字符串处理。</p>
+<p>–SET key value：设置指定 key 的值</p>
+<p>-GET key：获取指定 key 的值。</p>
+<p>–GETRANGE key start end:返回 key 中字符串值的子串</p>
+<h4 id="Hash数据类型"><a href="#Hash数据类型" class="headerlink" title="Hash数据类型"></a>Hash数据类型</h4><p>哈希Hash是一个String类型的field和value的映射表，用于 存储对象,每个hash可以存储232-1键值对（40多亿）。</p>
+<p>–HSET key field value:将哈希表 key 中的 field 的值设为 value</p>
+<p>–HGET key field：获取指定 key 的指定字段的值。</p>
+<p>–HMSET key field1 value1 field2 value2…：同时设置多个Hash</p>
+<p>–HGETALL key:获得哈希表中指定key的所有字段和值。</p>
+<h4 id="List"><a href="#List" class="headerlink" title="List"></a>List</h4><p>List列表是简单的字符串列表，按照插入顺序排序。</p>
+<p>–LPUSH key value1 [value2]:将一个或多个值插入到列表 头部（左部）</p>
+<p>–LRANGE key start stop:获取列表指定范围内的元素</p>
+<p>–RPUSH key value1 [value2]:将一个或多个值插入到列表 尾部（右部）</p>
+<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><p>Set是String类型的无序集合，集合成员是唯一的，不能出现重复的数据。通过哈希表实现，每个集合可存储40 多亿个成员。</p>
+<p>–SADD key member1 [member2]：向集合添加一个或多个成员</p>
+<p>–SMEMBERS key:返回集合中的所有成员。</p>
+<p>–SREM key member1 [member2]：移除集合中一个或多个成员</p>
+<h4 id="Sorted-Set"><a href="#Sorted-Set" class="headerlink" title="Sorted Set"></a>Sorted Set</h4><p>Sorted Set有序集合和集合一样也是String类型元素的 集合，且不允许重复的成员。不同的是每个元素都会关联一个double类型的数，Redis通过这个数来为集合中的成员进行从小到大的排序。</p>
+<p>–ZADD key score1 member1 [score2 member2]：向有序集 合添加一个或多个成员，或者更新已存在成员的数值</p>
+<p>–ZRANGE key start stop [WITHSCORES]:通过索引区间返回有序集合指定区间内的成员</p>
+<h4 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h4><p>Redis事务的定义方法：</p>
+<p>–执行MULTI:开始一个事务。</p>
+<p>–命令入队。</p>
+<p>–执行EXEC：依次执行队列中的命令。</p>
+<p>单个命令是原子性的，但事务不是原子性的。</p>
+<p>批量操作在发送 EXEC 命令前被放入队列缓存；</p>
+<p>收到 EXEC 命令后进入事务执行，事务中任意命令执行失败，其余的命令依然被执行（非原子性）；</p>
+<p>在事务执行过程，其他客户端提交的命令请求不会插入 到事务执行命令序列中。</p>
+<h2 id="文档数据库"><a href="#文档数据库" class="headerlink" title="文档数据库"></a>文档数据库</h2><p>文档数据库是将数据以文档的形式存储，若干个文档形成一个集合，若干个集合构成了一个独立的文档数据库。</p>
+<p>文档是由一些键值对构成的有序集合。而键值对是由键和值组成的， 且每个键值对只能出现一次。文档通常用 JSON 格式进行编写，也可以用 XML 格式进行描述。</p>
+<p>集合是由相似文档构成的组，同一个集合内的文档结构可以是不同的。集合没有类似SQL数据库中严格的数据库结构（称为模式或纲要），无需提前为集合中的文档定义模式，是无纲要的数据库。一般地，集合内的文档通常都与同一个主题相关。</p>
+<p>文档数据库是存放集合的容器。</p>
+<h3 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h3><p>1）垂直分区：对文档的键值对进行分区，不同的键值 对存储到不同的服务器上</p>
+<p>2）水平分区 将不同的文档划分在不同的分区上，称为“分片”，这些分片会保存在不同的服务器上。</p>
+<p>–优势：提高文档数据库的访问性能，并发度；提高文档数据库的可扩展性。</p>
+<p>–用分片键来划分：用某个键去划分文档，如名称、 类型、日期、地域等。</p>
+<p>–用分区算法来实现数据划分，如按照范围、标准、 哈希分区等。</p>
+<h3 id="设计策略"><a href="#设计策略" class="headerlink" title="设计策略"></a>设计策略</h3><p>在关系数据库中，规范化的目标是减少数据冗余 和更新异常。在文档数据库中，为了提高性能，尽量少地进行连接操作，把相关的数据都放在同一份文档之内，这个过程称为去规范化。 1：n关系</p>
+<p>– 采用嵌套的两个文档表示一对多关系中的两个实体</p>
+<p>– 在文档中给出父节点&#x2F;子节点的引用</p>
+<p>N:M关系</p>
+<p>– 采用两个集合来建模，每个集合表示一种实体， 每个集合内的文档维护一份标识符列表。</p>
+<h3 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h3><p>show dbs；db 显示当前数据库；use dbname；db.dropDatabase()</p>
+<h4 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h4><p>1）db.createCollection(name, options)：创建集合，类似 数据库中的表。</p>
+<p>– name: 要创建的集合名称；</p>
+<p>– options: 可选参数, 指定有关内存大小及索引的选 项；</p>
+<p>例如：db.createCollection(“orders”,{size:1024,capped:true,ma x:100}) &#x2F;&#x2F;指定size 1024KB，大小固定，满了就会删除旧文 档，最多存放100个文档。</p>
+<p>2）show collections：显示当前数据库中的集合。</p>
+<p>3）db.collection.drop()：删除集合</p>
+<h4 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h4><p>1）db.COLLECTION_NAME**.insert(**document):向集合中添加文档，注意大小写敏感。</p>
+<p>db.firstcollect.insert({</p>
+<p>person_id:319,</p>
+<p>name:”Gang zhang”,</p>
+<p>occupation:”teacher”,</p>
+<p>address: [</p>
+<p>{street:”Zhaohui road”, zip: 310014},</p>
+<p>{street:”Liuhe road”, zip:310032} ]</p>
+<p>})</p>
+<p>2）db.COLLECTION_NAME.insertOne():向指定集合中插入一条文档数据</p>
+<p>– db.firstcollect.insertOne({“a”: 3})</p>
+<p>3）db.COLLECTION_NAME.**insertMany():**向指定集合中插入多条文档数据</p>
+<p>– db.firstcollect.insertMany([{“b”: 3}, {‘c’: 4}])</p>
+<p>4）db.COLLECTION_NAME.<strong>find({query}, {projection})</strong>: 查询指定集合中的文档，注意大小写敏感。</p>
+<p>–query：使用查询操作符指定查询条件，<strong>必填，但可以是空</strong>。类似于SQL中的where子句。</p>
+<p>–projection ：可选参数，使用<strong>投影</strong>操作符指定返回的键。如果返回所有键值，省略该参数。类似于 SQL中的Select子句</p>
+<p>db.COLLECTION_NAME.find().pretty():</p>
+<p>–pretty()方法：可选，以格式化的方式来显示所有 文档。</p>
+<p>–sort({key: 1&#x2F;-1}) 方法：对文档按照key排序，1为升序排列，-1降序排列。</p>
+<p>–skip()方法 ：可选，跳过指定数量的记录，优先级 2（&gt;3）。</p>
+<p>–limit()方法：可选，指定读取的记录条数，优先级 3。</p>
+<p>例如：db.orders.find({},{_id:0}) db.orders.find({cust_id:“A123”})</p>
+<p>db.orders.find({},{_id:0,cust_id:1,amount:1}).limit(2).skip(1).sort({amount:-1})</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/1ee8d632-1ad1-46f2-8f81-aaffca6d1e22.png" alt="image.png"></p>
+<p>5）db.COLLECTION_NAME.<strong>update</strong>(<strong>&lt;query&gt;,&lt;update&gt;,</strong></p>
+<p>{<strong>upsert</strong>:&lt;boolean&gt;,<strong>multi</strong>: &lt;boolean&gt;, <strong>writeConcern</strong>: &lt;document&gt;})</p>
+<p>– query:更新条件，必填。</p>
+<p>– update:更新的对象和一些更新的操作符，必填。</p>
+<p>– 更新参数：</p>
+<p>• upsert:如果不存在update的记录，是否插入新文档，true为插入，</p>
+<p>默认是false，不插入。选填</p>
+<p>·multi: 默认是false,只更新找到的第一条记录，如果这个参数为true, 就把按条件查出来多条记录全部更新。选填</p>
+<p>db.orders.update({cust_id:”A123”},{$set:{amount:500}},true,false)</p>
+<p>6）db.COLLECTION_NAME.save(&lt;document&gt;):插入或更新已存在的文档。</p>
+<p>指定 _id 字段更新，否则insert</p>
+<p>7）db.COLLECTION_NAME.remove({}) : 移除集合中的文档。</p>
+<p>– query: 删除文档的条件，必填。</p>
+<p>– justOne：如果设为 true 或 1，则只删除一个文档，如果不设置该参数，或使用默认值 false，则删除所有匹配条件的文档。</p>
+<p>deleteOne（）、deleteMany（）类似。</p>
+<h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><p>1）db.collection.createIndex({keys：value}, options})</p>
+<p>– Key:要创建的索引字段，value值是1按升序创建索引，-1则按降序创建索引。</p>
+<p>– Options：根据该参数创建不同类型的索引。</p>
+<p>• 在title上按升序创建一个索引</p>
+<p>db.col.createIndex({“title”:1})</p>
+<p>• 在title和description多个Key上创建复合、唯一索引”cust_index”</p>
+<p>db.col.createIndex({“title”:1,”description”:-1}, { name:”cust_index”,unique: true}) db.collection.dropIndex(“cust_index”) db.orders.getIndexes()</p>
+<h4 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h4><p>db.COLLECTION.aggregate([{pipeline1},{pipelin e2},{pipeline3}…]): 主要用于数据的分组统计，如求平均值、求和等，类似sql语句中的 sum()、count()等。</p>
+<p>– Pipeline操作: 管道操作的目的在于将上一个管道命令的输出作为下一个管道命令的输入。</p>
+<p>db.orders.aggregate([{$match:{status:”A”}},{$group:{ _id:”$cust_id”,totals:{$sum:”$amount”}}}])</p>
+<p>–先使用$match命令查询符合条件的文档，再使用$group命令根据”cust_id”分组统计。</p>
+<h4 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h4><p>MongoDB 模糊查询使用反斜杠“&#x2F;”，并结合一些转义字符实现模糊查询，通过例子来说明具 体使用方法。</p>
+<p>查询图书名称中包含”office”的文档，其语句为：</p>
+<p>db.Books.find({“book_name”:<strong>&#x2F;office&#x2F;</strong>}).pretty()</p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/393f21eb-cfcb-42fa-9f7c-1ab7ee12591d.png" alt="image.png"></p>
+<h2 id="列族数据库"><a href="#列族数据库" class="headerlink" title="列族数据库"></a>列族数据库</h2><h3 id="集群机制"><a href="#集群机制" class="headerlink" title="集群机制"></a>集群机制</h3><h4 id="列族数据库特点"><a href="#列族数据库特点" class="headerlink" title="列族数据库特点"></a>列族数据库特点</h4><p>① 弹性可扩展： Cassandra高度可扩展，允许添加更 多的硬件以适应更多的客户和更多的数据。 ② 始终基于架构：Cassandra没有单点故障，它可以 连续用于不能承担故障的关键业务应用程序。 ③ 线性可扩展： Cassandra通过增加集群中的节点数 量增加吞吐量，保持一个快速的响应时间。 ④ 灵活的数据存储：Cassandra适应所有可能的数据 格式，包括：结构化，半结构化和非结构化。可 以根据需要动态地适应变化的数据结构。⑤ 便捷的数据分发：Cassandra通过在多个数据中 心之间复制数据，可以灵活地在需要时分发数据。 ⑥ 事务支持：支持最终一致性（AP）。 ⑦ 快速写入：被设计为在廉价的商品硬件上运行。 它执行快速写入，并可以存储数百TB的数据， 而不牺牲读取效率。</p>
+<h4 id="Cassandra架构"><a href="#Cassandra架构" class="headerlink" title="Cassandra架构"></a>Cassandra架构</h4><p>Cassandra的设计目的是处理跨多个节点的大数据工作负载，而没有任何单点故障；节点之间具有对等分布式系统，并且数据分布在集群中的所有节点之间。</p>
+<p>– Cassandra集群是一个对等的网络，所有节点都扮演相同的 角色， 每个节点是独立的，并且同时互连到其他节点。</p>
+<p>– Cassandra集群中的每个节点都可以接受读取和写入请求， 无论数据实际位于集群中的何处。</p>
+<p>– 当某节点关闭时，可以从网络中的其他节点提供读&#x2F;写请求。</p>
+<p>1）Cassandra<strong>存储机制</strong>：</p>
+<p>• <strong>提交日志</strong>（CommitLog）： Cassandra在写入数据之前，都要先写日志，用于崩溃后的恢复。</p>
+<p>• <strong>存储表</strong>（Mem表）：是一个驻留在内存中的数据结构，当超过存储表的块大小时，批量写入到磁盘上，即SSTable上。</p>
+<p>• <strong>磁盘文件</strong>（SSTable）： Cassandra在磁盘上存储列族数据的文件。</p>
+<p>• <strong>布隆（Bloom）过滤器</strong>：Cassandra中使用了Bloom过滤器来检测行键所代表的数据是否存在。</p>
+<p>2）Cassandra<strong>通信机制</strong>：</p>
+<p>Cassandra采用<strong>Gossiper协议</strong>进行节点间通信，通过该机制可以了解集群中包含哪些节点、每个节点的状态，这使得集群中任何一个节点都可以收到其他服务器的状态信息，完成任意读取和写入操作；</p>
+<p>此外，Cassandra采用<strong>反熵机制</strong>定期检查节点数据，保障不同副本数据之间的一致性。这里采用的检查不一致的方法是<strong>Merkle Tree</strong>（默克尔树）。</p>
+<p>3）Cassandra<strong>数据复制</strong></p>
+<p>• 数据复制方式：将数据分配到各个节点上，每个节点会存放部分数据的一个副本，允许数据在节点间相互复制，对用户透明。但要求同一行的所有数据必须放在集群的同一节点上。</p>
+<p>• 数据副本因子：定义了集群中存储的副本数量，例如副本 因子是3，则存储3份数据副本。</p>
+<p>数据复制策略：定义数据的副本如何放置到集群环上。</p>
+<p>– <strong>SimpleStrategy</strong> ：不考虑机架的因素，存储在连续的几个节点。假如副本数为3，属于A节点的数据存储在相邻的两个节点中。</p>
+<p>– <strong>OldNetworkTopologyStrategy</strong> :考虑机架的因素，先找一个与第一个数据副本不在同一个数据中心的节点放置第二个 副本；然后再继续找与第二个备份节点位于同一个数据中心，但是不同机架的节点进行备份；接下来所有的备份节点寻找策略就按照SimpleStrategy的备份策略继续寻找。</p>
+<p>– <strong>NetworkTopologyStrategy</strong> ：将M个副本放置到其他的数据中心，将N-M-1的副本放置在同一数据中心的不同机架中。</p>
+<p>4）Cassandra<strong>读写过程</strong></p>
+<p>• 写操作：</p>
+<p>– 节点的每个写入活动都由提交日志捕获。</p>
+<p>– 稍后数据将被存储在内存表中。</p>
+<p>– 每当内存表满时，数据将写入SStable数据文件。</p>
+<p>– 所有写入都会在整个集群中自动分区和复制。</p>
+<p>– Cassandra会定期整合SSTables，丢弃不必要的数据。</p>
+<p>• 读操作：</p>
+<p>– 先从内存表读取所需要的值。</p>
+<p>– 否则从保存所需数据的SSTable中读取。</p>
+<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>·Keyspace：键空间，概念同早期版本，对应一个数据库。</p>
+<p>• Table：表，与键族的概念相对应，且与RDBMS中的表很类似，不同的是在 Cassandra 中属于同一张表的数据在物理上是分布在不同节点上存储的，同 一张表由多个分区（Partition）组成。</p>
+<p>• 主键：同之前的行键，是一行数据的唯一标识符；如果主键由多个键组成，则称为复合主键。</p>
+<p>• 复合主键：复合主键各部分作用不同：</p>
+<p>– 分区键（partition key）：复合主键的第一个或者第一组 是分区键，将根据这个column的值来分区。不同的分区 会被存储在不同的节点上，<strong>同一行数据分配到相同节点</strong>。</p>
+<p>– 聚类键（clustering columns）：复合主键的第二个及之后 的键为聚类键，用来给数据<strong>排序</strong>，或者索引。</p>
+<p>• <strong>只有主键中涉及的column，才可以作为查询的条件</strong>。</p>
+<p>• 集合数据类型：Cassandra新版本通过设置集合数据 类型来灵活实现超级列：</p>
+<p>– List数据类型：列表，存储类型相同且可以重复的值。</p>
+<p>• [value, value,…]</p>
+<p>– Set数据类型：集合，存储类型相同但不重复的值。</p>
+<p>• {value, value, …}</p>
+<p>– Map数据类型：提供了键到值的映射，每一个元素在内部 作为一列存储，可以修改，替换，删除和查询。</p>
+<p>• {‘key1’:value1, ‘key2’:value2}</p>
+<h3 id="操作语言"><a href="#操作语言" class="headerlink" title="操作语言"></a>操作语言</h3><h4 id="创建键空间"><a href="#创建键空间" class="headerlink" title="创建键空间"></a>创建键空间</h4><p>CREATE KEYSPACE KeySpaceName WITH replication &#x3D; {‘<strong>class</strong>‘: ‘Strategy name’, ‘<strong>replication_factor</strong>‘ : ‘No.Of replicas’}</p>
+<h4 id="增删改-类似于SQL"><a href="#增删改-类似于SQL" class="headerlink" title="增删改 类似于SQL"></a>增删改 类似于SQL</h4><p>CREATE (TABLE | COLUMNFAMILY) ( primary key， [static] ，…… )</p>
+<p>– 静态列：列为静态(STATIC)则能够在在一个给定<strong>分区键</strong>里的多行数据之间共享数据</p>
+<p>例如：</p>
+<p>CREATE TABLE users (</p>
+<p>username text,</p>
+<p>id timeuuid,</p>
+<p>email text STATIC,</p>
+<p>encrypted_password blob STATIC,</p>
+<p>body text,</p>
+<p>PRIMARY KEY (username, id)</p>
+<p>);</p>
+<p>– 将 email 和 encrypted_password 两个字段设置为 STATIC列了，则意味着同一个 username 只会有一个 email 和 encrypted_password 。</p>
+<p>– 在插入获修改数据时，email和encrypted_password 都被设置为相同的值</p>
+<h4 id="查"><a href="#查" class="headerlink" title="查"></a>查</h4><p>SELECT * FROM &lt;table name&gt;</p>
+<p>WHERE &lt;condition&gt;;</p>
+<p>• Where 条件中只支持主键列及索引列的查询。</p>
+<p>• <strong>分区主键</strong>只能用”**&#x3D;**”比较运算符进行查询。</p>
+<p>• 聚类主键支持&#x3D;、&gt;、 &lt;、 &gt;&#x3D;、 &lt;&#x3D;，且要<strong>依次使用</strong>。</p>
+<p>primary key(key1, key2, key3) key1&#x3D;</p>
+<p>• <strong>索引列</strong>只支持**&#x3D;**查询。</p>
+<p>• 否则，需要增加<strong>allow filtering</strong>短语，表示强制查询。</p>
+<p>·删除 DELETE [ column_name ] FROM &lt;identifier&gt; WHERE &lt;condition&gt;</p>
+<h4 id="集合-1"><a href="#集合-1" class="headerlink" title="集合"></a>集合</h4><p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/28a19bd6-a78d-4262-b974-fb8e1e4519fb.png" alt="image.png"></p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/14e4b88e-c183-4e65-9e15-b842a712b22c.png" alt="image.png"></p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/30f31845-e3e1-4641-9682-03b5528f6aa6.png" alt="image.png"></p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/dd461fe5-4301-4925-ac53-beb0de97b177.png" alt="image.png"></p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/73d8fafe-0b86-4c57-8c02-7f6d3876e578.png" alt="image.png"></p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/21e8df2c-ddd8-4f26-95e2-63c4b64ee096.png" alt="image.png"></p>
+<p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/ba1ca70b-5b06-4bde-8426-3b899abb2666.png" alt="image.png"></p>
+<h2 id="图数据库"><a href="#图数据库" class="headerlink" title="图数据库"></a>图数据库</h2><p>图数据库是一种基于图论的新型NoSQL数据库， 它的数据存储结构和数据查询方式都是以图论为基础：</p>
+<p>· 节点：表示对象，对象可 以有属性和标签；</p>
+<p>• 边：表示对象间的关系， 边也可以有属性和类型；</p>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><h4 id="属性图数据模型"><a href="#属性图数据模型" class="headerlink" title="属性图数据模型"></a>属性图数据模型</h4><p>图数据模型定义了图中节点以及关系的存储和实现方法。</p>
+<p>属性图是一种常用的图数据模型，被广泛采用，如Neo4j，其主要特点如下：</p>
+<p>– 图由节点和关系（边）组成；</p>
+<p>– 节点有一个或多个标签；</p>
+<p>– 节点有一组属性（键值对）；</p>
+<p>– 关系有一个类型，可以有一组属性；</p>
+<p>– 关系是有方向的，只有一个开始节点和一个结束节点。</p>
+<h4 id="三元组图数据模型"><a href="#三元组图数据模型" class="headerlink" title="三元组图数据模型"></a>三元组图数据模型</h4><p>三元组模型是另外一种重要的图数据模型，包含主谓宾的数据结构，通过三元组来表达实体与实体之间的关系，或者属性与属性值之间的关系，有两种形式：</p>
+<p>– （实体，关系，实体）</p>
+<p>– （实体，属性，属性值）</p>
+<h4 id="超图"><a href="#超图" class="headerlink" title="超图"></a>超图</h4><p>一条边可以关联多个节点</p>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><p><strong>写语句：</strong></p>
+<h4 id="创建节点Create语句"><a href="#创建节点Create语句" class="headerlink" title="创建节点Create语句"></a>创建节点Create语句</h4><p>节点用一对小括号<strong>（）</strong>表示，是图数据库的一个节点，节点可以有一个或多个标签，可以有一个或多个 属性。</p>
+<p>Create (Variable:Lable1:Lable2 {Key1:Value1, Key2:Value2})</p>
+<h4 id="创建关系Create语句"><a href="#创建关系Create语句" class="headerlink" title="创建关系Create语句"></a>创建关系Create语句</h4><p>关系用**[]<strong>表示，创建关系时要指定头节点、尾节点和</strong>类型**， 并指定关系方向</p>
+<p>– 符号“（a）-[r:type]-&gt;（b）”，表示有方向的关系。</p>
+<p>StartNode-[Variable:Type {Key1: Value1, Key2:Value2}] -&gt; EndNode</p>
+<p>• 创建两个节点和一个关系</p>
+<p>CREATE (n:Person { name: ‘Robert’, born: 1951 })</p>
+<p>-[r:DIRECTED] -&gt; (m:Movie { title: ‘Forrest’, released: 1951 })</p>
+<p>RETURN n,r,m</p>
+<p>• Create语句<strong>无法创建没有方向的关系</strong></p>
+<h4 id="MERGE语句"><a href="#MERGE语句" class="headerlink" title="MERGE语句"></a>MERGE语句</h4><p>MERGE语句的作用有两个：</p>
+<p>– 若模式存在，则匹配指定的模式；</p>
+<p>– 若模式不存在，则创建新的模式；</p>
+<p>– 功能是Match子句和Create子句的组合。</p>
+<p>当在整个模式上使用MERGE时，要么整个模式匹配到，要么整个模式被创建。MERGE不能部分应用于模式</p>
+<p>• 检查‘michael’节点是否存在，若不存在该节点，则创建该节点并设置它的属性；若存在所匹配的节点，则不设置它的属性。</p>
+<p>Merge (n:Person{name:’michael’}) <em>on create</em> set n.age&#x3D;20 return n</p>
+<h4 id="SET语句"><a href="#SET语句" class="headerlink" title="SET语句"></a>SET语句</h4><p>SET语句用于更新节点的标签以及节点和关系的属性。</p>
+<p>• 为节点新增一个属性。</p>
+<p>MATCH (n:Person{name:’michael’}) SET <strong>n.born</strong> &#x3D; 1955 RETURN n</p>
+<p>• 为节点新增两个标签。</p>
+<p>MATCH (n:Person{name:’michael’}) SET <strong>n:Teacher:Man</strong> RETURN n</p>
+<p>• 将一个节点的属性值设置为Null，此时属性被删除</p>
+<p>MATCH (n:Person{name:’michael’}) SET n.name&#x3D;<strong>NULL</strong> RETURN n</p>
+<p>• 匹配节点，若匹配成功，则在该节点上设置属性； 若匹配不成功，则创建新节点，不设置属性。</p>
+<p>Merge(n:Teacher{name: ‘michael’}) <strong>on match</strong> set n.title&#x3D;’Professor’ return</p>
+<h4 id="DELETE语句"><a href="#DELETE语句" class="headerlink" title="DELETE语句"></a>DELETE语句</h4><p>DELETE语句用于删除图元素（节点、关系或者路径）。</p>
+<p>– 不能只删除节点，而不删除与之相连的关系，要么显式地删除对应的关系。</p>
+<p>– <strong>DETACH</strong> DELETE语句能够删除一个节点及其所有关系。</p>
+<h4 id="REMOVE语句"><a href="#REMOVE语句" class="headerlink" title="REMOVE语句"></a>REMOVE语句</h4><p>REMOVE语句用于移除节点的标签或者节点和关系的属性。</p>
+<p>• 移除节点的一个属性。</p>
+<p>MATCH (n:Person{name:’michael’}) Remove n.born RETURN n</p>
+<p>• 移除节点的一个（或多个）标签。</p>
+<p>Match(n:Person{name:’Cheng long’}) remove n:Person:Man return n</p>
+<h4 id="FOREACH语句"><a href="#FOREACH语句" class="headerlink" title="FOREACH语句"></a>FOREACH语句</h4><p>FOREACH语句能够更新列表、路径等集合中的每一个元素，可执行的更新命令包括CREATE、SET、 CREATE UNIQUE、DELETE。</p>
+<p>语法格式： <strong>FOREACH (变量 IN [列表] | 更新语句)</strong></p>
+<p>例如：FOREACH (n IN <strong>nodes(p)</strong> | SET n.marked&#x3D;TRUE)</p>
+<p><strong>读语句：</strong></p>
+<h4 id="Match"><a href="#Match" class="headerlink" title="Match"></a>Match</h4><p>• 查询与给定节点<strong>有关系</strong>的节点</p>
+<p>match (n)<strong>–</strong>(m:Movie{title:’American’}) return n,m</p>
+<h4 id="OPTIONAL-MATCH语句"><a href="#OPTIONAL-MATCH语句" class="headerlink" title="OPTIONAL MATCH语句"></a>OPTIONAL MATCH语句</h4><p>OPTIONAL MATCH匹配模式与Match类似，不同之处在于，如果没有匹配到，OPTIONAL MATCH将用 <strong>NULL作为未匹配到部分的值</strong>。</p>
+<h4 id="aggregation"><a href="#aggregation" class="headerlink" title="aggregation"></a>aggregation</h4><p>count、sum、avg、min、max、<strong>collect（放入一个列表）</strong></p>
+<p><strong>通用语句：</strong></p>
+<h4 id="Return：返回查询结果集中的内容。"><a href="#Return：返回查询结果集中的内容。" class="headerlink" title="Return：返回查询结果集中的内容。"></a>Return：返回查询结果集中的内容。</h4><h4 id="Order-by：对输出结果进行排序。"><a href="#Order-by：对输出结果进行排序。" class="headerlink" title="Order by：对输出结果进行排序。"></a>Order by：对输出结果进行排序。</h4><p>ORDER BY语句用于对输出的结果进行排序，要<strong>紧跟在RETURN或WITH的后面</strong>，它指定了输出的结果 应该如何排序，ASC升序，DESC降序。</p>
+<h4 id="Limit：限制输出的行数。"><a href="#Limit：限制输出的行数。" class="headerlink" title="Limit：限制输出的行数。"></a>Limit：限制输出的行数。</h4><h4 id="Skip：跳过开始的一部分结果。"><a href="#Skip：跳过开始的一部分结果。" class="headerlink" title="Skip：跳过开始的一部分结果。"></a>Skip：跳过开始的一部分结果。</h4><h4 id="With：将分段的查询部分连接在一起，查询结果从一部分以管道形式传递给另外一部分作为开始点。"><a href="#With：将分段的查询部分连接在一起，查询结果从一部分以管道形式传递给另外一部分作为开始点。" class="headerlink" title="With：将分段的查询部分连接在一起，查询结果从一部分以管道形式传递给另外一部分作为开始点。"></a>With：将分段的查询部分连接在一起，查询结果从一部分以管道形式传递给另外一部分作为开始点。</h4><p>一个复杂的查询语句可能需要经多次处理。WITH语句把上一个查询语句的结果作为输入，经适当处理， 再把结果传递到后面的语句中。类似于<strong>管道</strong></p>
+<p>MATCH (d{name:’D’})–(n1)–&gt;(n2) WITH n1, <strong>count</strong>(n2) AS num WHERE num &gt;1 RETURN n1.name,num</p>
+<p><strong>聚合的结果必须通过with子句才能被过滤</strong>，即with子句保留n1，并新增聚合查询count(*)，通过where子句过滤。</p>
+<p>• 按照姓名排序后，收集姓名的列表</p>
+<p>MATCH (n) WITH n ORDER BY n.name DESC RETURN collect(n.name)</p>
+<p>ORDER BY子句不可以跟在Match语句后面，要紧跟RETURN或者WITH的后面</p>
+<h4 id="Unwind：将一个列表展开为一个行的序列，列表可以以参数的形式传入。"><a href="#Unwind：将一个列表展开为一个行的序列，列表可以以参数的形式传入。" class="headerlink" title="Unwind：将一个列表展开为一个行的序列，列表可以以参数的形式传入。"></a>Unwind：将一个列表展开为一个行的序列，列表可以以参数的形式传入。</h4><p><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/5815713f-66fb-4daf-9f31-36e7f04be7b0.png" alt="image.png"></p>
+<h4 id="Union：将多个查询结果组合起来。"><a href="#Union：将多个查询结果组合起来。" class="headerlink" title="Union：将多个查询结果组合起来。"></a>Union：将多个查询结果组合起来。</h4><p>• UNION语句：将两个结果集进行合并，去掉重复的。</p>
+<p>• UNION ALL语句：将两个结果集合并，不去掉重复的。</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="断言函数"><a href="#断言函数" class="headerlink" title="断言函数"></a>断言函数</h4><p>断言是一个布尔函数，即对给定的输入返回true 或false，用于过滤子图。</p>
+<p>• All：判断断言是否适用于列表中的所有元素。</p>
+<p>• Any：判断断言是否至少适用于列表中的一个元素。</p>
+<p>• None：断言不适用于列表中的任何元素，则返回true。</p>
+<p>• Single：断言刚好只适用于列表中的某一个元素，则返回true 。</p>
+<p>语法：</p>
+<p>All&#x2F;Any&#x2F;None&#x2F;Single (variable IN list WHERE predicate)</p>
+<p>– variable：断言变量</p>
+<p>– list：列表表达式</p>
+<p>– predicate：测试列表中所有元素的断言</p>
+<p>例如：</p>
+<p>Any(var IN nodes(p) WHERE var.eyes&#x3D;’blue’)</p>
+<p>• Exists：数据库存在该<strong>模式</strong>或节点中存在该<strong>属性</strong>时，返回true 。</p>
+<p>返回具有name属性，且是否已婚的信息。</p>
+<p>MATCH (n) WHERE <strong>exists(n.name)</strong> &#x2F;&#x2F;存在指定name属性</p>
+<p>RETURN n.name AS name, <strong>exists((n)-[:MARRIED]-&gt;())</strong> AS is_married</p>
+<h4 id="标量函数"><a href="#标量函数" class="headerlink" title="标量函数"></a>标量函数</h4><p>• Size：返回列表中元素的个数。</p>
+<p>返回模式表达式匹配的<strong>子图的个数</strong></p>
+<p>MATCH(a) WHERE a.name&#x3D;’Alice’ RETURN <strong>size((a)–&gt;()–&gt;())</strong> AS num</p>
+<p>• Length：返回路径的长度（关系的个数）。</p>
+<p>• <strong>Type：返回关系的类型(关系的类型只有一个)。</strong></p>
+<p>• Id：返回关系或者节点的id.</p>
+<p>• Coalesce：返回表达式列表中第一个非空的值，若全为空， 返回null。</p>
+<p>• Head：返回列表中的第一个元素。</p>
+<p>• Last ：返回列表中最后一个元素。</p>
+<p>• startNode:返回一个关系的开始节点。</p>
+<p>• endNode：返回一个关系的结束节点。</p>
+<p>·<strong>PROPERTIES()<strong>：返回节点或关系的</strong>属性及属性值</strong>。</p>
+<h4 id="列表函数"><a href="#列表函数" class="headerlink" title="列表函数"></a>列表函数</h4><p>• <strong>Nodes</strong>：返回<strong>路径中的所有节点</strong>的属性和属性值。</p>
+<p>• <strong>Relationships</strong>：返回路径中的<strong>所有关系</strong>的属性和属性值。</p>
+<p>• <strong>Labels</strong>：返回节点的标签(标签可以有多个)。</p>
+<p>• Keys：以字符串形式返回一个节点、关系或map的所有<strong>属性名称</strong>。</p>
+<p>• Tail：返回除首元素之外的所有元素。</p>
+<p>• Range：返回某个范围内的数值，值之间默认步长为1。</p>
+<p>返回0-10之间步长为1，2-18步长为3的所有值。</p>
+<p>RETURN range(0,10),range(2,18,3)</p>
+<p>• Reduce：对列表中每个元素执行表达式，将表达式结果存入累加器。</p>
+<p>将路径中每个节点的age数值加起来，返回一个单值</p>
+<p>RETURN reduce(totalAge&#x3D;0, n IN nodes(p) | totalAge+n.age) AS reduction</p>
+<h3 id="模式操作"><a href="#模式操作" class="headerlink" title="模式操作"></a>模式操作</h3><p><strong>模式用于描述如何查询图数据</strong>，包括节点模式、关系模式、关联节点模式、变长路径的模式、 路径变量。</p>
+<h4 id="模式概念"><a href="#模式概念" class="headerlink" title="模式概念"></a>模式概念</h4><p>1、节点模式</p>
+<p>节点模式使用一对小括号()表示，节点具有标签和属性，如果需要引用节点，则需要定义节点变量，常见的节点模式如下：</p>
+<p>· ()：该模式用于描述节点，且是匿名节点；</p>
+<p>·(n) ：该模式用于描述节点，节点变量名是 n；</p>
+<p>· (n:label)：该模式用于描述节点，节点具有指定的标签 label，也可以指定多个标签；</p>
+<p>··(n{name: ‘Vic’})：该模式用于描述节点，节点具有 name 属性，并且属性值是’Vic’，也可以指定多个属性；</p>
+<p>· (n:label{name: ‘Vic’})：该模式用于描述节点，节点具有指定的标签 label 和属性 name，并且属性值是 ‘Vic’。</p>
+<p>2、关系模式</p>
+<p>关系模式使用一对中括号[]表示，如果需要引用关系，则需要定义关系变量，常见的关系模式如下：</p>
+<p>· []：该模式用于描述关系，且是匿名关系；</p>
+<p>· [r]：该模式用于描述关系，关系变量名是 r；</p>
+<p>· [r: type]：该模式用于描述关系，type 是关系类型，每一个关系必须有且仅有一个类型；</p>
+<p>· [r:type {name: ‘Friend’}]：该模式用于描述关系，关系的类型是 type，关系具有属性 name，并且属性值是 ‘Friend’。</p>
+<p>3、关联节点模式</p>
+<p>节点之间通过关系联系在一起，由于关系具有方向性，因此，–&gt;表示有向关系，–表示存在关系，但不指定方向，常见的关联节点模式如下：</p>
+<p>· (a)-[r]-&gt;(b) ：该模式用于描述节点 a 和 b 之间存在的有向关系 r；</p>
+<p>· (a)–&gt;(b)：该模式用于描述节点 a 和节点 b 之间存在的有向关系；</p>
+<p>· (a)-[r]-(b)：该模式用于描述节点 a 和 b 之间存在关系 r，不指定方向。</p>
+<p>4、路径模式</p>
+<p>路径（Path）是节点和关系的有序组合。从一个节点通过直接关系链接到另外一个节点，这个过程叫遍历，经过的关系个数称为路径长度，也称为步长。Neo4j 支持变长路径模式，**[*N..M]表示路径长度的最小值为 N，最大值为 M**，常见的路径模式如下：</p>
+<p>· (a)–&gt;(b)：是步长为 1 的路径，节点 a 和 b 之间存在直接关系，且方向从 a 到 b；</p>
+<p>· (a)–&gt;()–&gt;(b)：是步长为 2 的路径，从节点 a 经过两个关系和一个节点，到达节点 b；</p>
+<p>· (a)-[*2]-&gt;(b)：表示路径长度固定为 2，头节点是 a，尾节点是 b；</p>
+<p>· (a)-[*3..5]-&gt;(b)：表示路径长度的最小值是 3，最大值是 5，头节点是 a，尾节点是 b；</p>
+<p>· (a)-[*3..]-&gt;(b)：表示路径长度的最小值是 3，头节点是 a，尾节点是 b；</p>
+<p>· (a)-[*..5]-&gt;(b)：表示路径长度的最大值是 5，头节点是 a，尾节点是 b；</p>
+<p>· (a)-[*]-&gt;(b)：表示不限制路径长度，头节点是 a，尾节点是 b。</p>
+<p>此外，路径可以赋给一个变量，该变量是路径变量，用于查询路径。5、路径变量</p>
+<p>路径可以指定（assign）给一个变量，该变量是路径变量，用于引用查询路径。</p>
+<p>• 返回‘Alice‘节点到’Daniel‘节点，且长度不超过3的路径:</p>
+<p>MATCH <strong>p&#x3D;(a)-[*1..3]-&gt;(b)</strong>  WHERE a.name&#x3D;’Alice’ AND</p>
+<p>b.name&#x3D;’Daniel’ RETURN p</p>
+<h4 id="索引-1"><a href="#索引-1" class="headerlink" title="索引"></a>索引</h4><p>使用CREATE INDEX ON 可以在<strong>拥有某个标签的所有节点的某个属性</strong>上创建索引。</p>
+<p>• 在拥有Person标签的节点name属性上创建索引</p>
+<p>CREATE（Drop） INDEX ON :Person(name)</p>
+<h4 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h4><p>约束 Neo4j通过使用约束来保证数据完整性。约束可应用于节点 或者关系，可以创建节点属性的唯一性约束，也可以创建节点 和关系的属性存在性约束。</p>
+<p>在节点的 name 属性上添加唯一性约束。</p>
+<p><strong>CREATE CONSTRAINT ON (b:Person) ASSERT b.name IS UNIQUE</strong></p>
+<p>通过上述唯一性约束，<strong>具有 Person 标签的节点，其 name属性值是唯一的</strong>。</p>
+<p>在关系的 day 属性上添加<strong>存在性约束</strong>。</p>
+<p>CREATA CONSTRAINT ON <strong>()-[k: Knows]-()</strong> <em>ASSERT</em> <strong>exists</strong><em>(k.day)</em></p>
+<p>通过上述唯一性约束，具有 <strong>Knows 类型的关系必须具有 name 属性</strong>。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://blog.ripplesu.top">RippleSu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://blog.ripplesu.top/2023/02/23/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">http://blog.ripplesu.top/2023/02/23/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.ripplesu.top" target="_blank">RippleSu's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/NoSQL/">NoSQL</a></div><div class="post_share"><div class="social-share" data-image="http://img.ripplesu.top/random?dir=竖屏&amp;非关系式数据库期末复习" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/02/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1-pintos/" title="操作系统课程设计-pintos"><img class="cover" src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;操作系统课程设计-pintos" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">操作系统课程设计-pintos</div></div></a></div><div class="next-post pull-right"><a href="/2023/02/23/SQL%E6%B3%A8%E5%85%A5%E5%AE%9E%E9%AA%8C/" title="SQL注入实验"><img class="cover" src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;SQL注入实验" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">SQL注入实验</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="http://121.41.55.70:9000/image-lib/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">RippleSu</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/S-Lucien" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:syp@ripplesu.top" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A7%E7%94%9F%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">非关系式数据库产生的原因</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%92%E8%81%94%E7%BD%91%E7%8E%AF%E5%A2%83%E4%B8%8B%EF%BC%9A%E6%95%B0%E6%8D%AE%E9%87%8F%E6%9E%81%E5%A4%A7%E3%80%81%E8%AE%BF%E9%97%AE%E9%87%8F%E5%A4%A7%E3%80%81%E9%9C%80%E6%B1%82%E5%8D%83%E5%8F%98%E4%B8%87%E5%8C%96"><span class="toc-number">1.1.</span> <span class="toc-text">互联网环境下：数据量极大、访问量大、需求千变万化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.</span> <span class="toc-text">分布式数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E7%BE%A4%E6%9E%B6%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">集群架构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E7%9A%84%E4%BB%BB%E5%8A%A1"><span class="toc-number">2.2.</span> <span class="toc-text">分布式数据库管理的任务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CAP%E7%90%86%E8%AE%BA"><span class="toc-number">3.</span> <span class="toc-text">CAP理论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACID%E5%8E%9F%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">ACID原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BASE%E5%8E%9F%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">BASE原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E7%89%B9%E5%BE%81"><span class="toc-number">6.</span> <span class="toc-text">非关系式数据库基本特征</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%AE%E5%80%BC%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number"></span> <span class="toc-text">键值数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%AE%E5%80%BC%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">键值数据库的数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%AE%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E5%8C%BA"><span class="toc-number">2.</span> <span class="toc-text">键的设计与分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%AE%E5%80%BC%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%B9%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">键值数据库特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis"><span class="toc-number">4.</span> <span class="toc-text">Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#String"><span class="toc-number">4.1.</span> <span class="toc-text">String</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hash%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.2.</span> <span class="toc-text">Hash数据类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#List"><span class="toc-number">4.3.</span> <span class="toc-text">List</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Set"><span class="toc-number">4.4.</span> <span class="toc-text">Set</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Sorted-Set"><span class="toc-number">4.5.</span> <span class="toc-text">Sorted Set</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-number">4.6.</span> <span class="toc-text">事务</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number"></span> <span class="toc-text">文档数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%8C%BA"><span class="toc-number">1.</span> <span class="toc-text">分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5"><span class="toc-number">2.</span> <span class="toc-text">设计策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MongoDB"><span class="toc-number">3.</span> <span class="toc-text">MongoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E5%90%88"><span class="toc-number">3.1.</span> <span class="toc-text">集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%A1%A3"><span class="toc-number">3.2.</span> <span class="toc-text">文档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-number">3.3.</span> <span class="toc-text">索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%81%9A%E5%90%88"><span class="toc-number">3.4.</span> <span class="toc-text">聚合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.5.</span> <span class="toc-text">模糊查询</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E6%97%8F%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number"></span> <span class="toc-text">列族数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E7%BE%A4%E6%9C%BA%E5%88%B6"><span class="toc-number">1.</span> <span class="toc-text">集群机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E6%97%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%B9%E7%82%B9"><span class="toc-number">1.1.</span> <span class="toc-text">列族数据库特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cassandra%E6%9E%B6%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">Cassandra架构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">数据模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E8%AF%AD%E8%A8%80"><span class="toc-number">3.</span> <span class="toc-text">操作语言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%94%AE%E7%A9%BA%E9%97%B4"><span class="toc-number">3.1.</span> <span class="toc-text">创建键空间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A2%9E%E5%88%A0%E6%94%B9-%E7%B1%BB%E4%BC%BC%E4%BA%8ESQL"><span class="toc-number">3.2.</span> <span class="toc-text">增删改 类似于SQL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5"><span class="toc-number">3.3.</span> <span class="toc-text">查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E5%90%88-1"><span class="toc-number">3.4.</span> <span class="toc-text">集合</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number"></span> <span class="toc-text">图数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%9B%BE%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">属性图数据模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E5%85%83%E7%BB%84%E5%9B%BE%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">三元组图数据模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E5%9B%BE"><span class="toc-number">1.3.</span> <span class="toc-text">超图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9Create%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.1.</span> <span class="toc-text">创建节点Create语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%85%B3%E7%B3%BBCreate%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.2.</span> <span class="toc-text">创建关系Create语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MERGE%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.3.</span> <span class="toc-text">MERGE语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SET%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.4.</span> <span class="toc-text">SET语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DELETE%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.5.</span> <span class="toc-text">DELETE语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#REMOVE%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.6.</span> <span class="toc-text">REMOVE语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FOREACH%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.7.</span> <span class="toc-text">FOREACH语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Match"><span class="toc-number">2.8.</span> <span class="toc-text">Match</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OPTIONAL-MATCH%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.9.</span> <span class="toc-text">OPTIONAL MATCH语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#aggregation"><span class="toc-number">2.10.</span> <span class="toc-text">aggregation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Return%EF%BC%9A%E8%BF%94%E5%9B%9E%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E9%9B%86%E4%B8%AD%E7%9A%84%E5%86%85%E5%AE%B9%E3%80%82"><span class="toc-number">2.11.</span> <span class="toc-text">Return：返回查询结果集中的内容。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Order-by%EF%BC%9A%E5%AF%B9%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F%E3%80%82"><span class="toc-number">2.12.</span> <span class="toc-text">Order by：对输出结果进行排序。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Limit%EF%BC%9A%E9%99%90%E5%88%B6%E8%BE%93%E5%87%BA%E7%9A%84%E8%A1%8C%E6%95%B0%E3%80%82"><span class="toc-number">2.13.</span> <span class="toc-text">Limit：限制输出的行数。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Skip%EF%BC%9A%E8%B7%B3%E8%BF%87%E5%BC%80%E5%A7%8B%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86%E7%BB%93%E6%9E%9C%E3%80%82"><span class="toc-number">2.14.</span> <span class="toc-text">Skip：跳过开始的一部分结果。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#With%EF%BC%9A%E5%B0%86%E5%88%86%E6%AE%B5%E7%9A%84%E6%9F%A5%E8%AF%A2%E9%83%A8%E5%88%86%E8%BF%9E%E6%8E%A5%E5%9C%A8%E4%B8%80%E8%B5%B7%EF%BC%8C%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E4%BB%8E%E4%B8%80%E9%83%A8%E5%88%86%E4%BB%A5%E7%AE%A1%E9%81%93%E5%BD%A2%E5%BC%8F%E4%BC%A0%E9%80%92%E7%BB%99%E5%8F%A6%E5%A4%96%E4%B8%80%E9%83%A8%E5%88%86%E4%BD%9C%E4%B8%BA%E5%BC%80%E5%A7%8B%E7%82%B9%E3%80%82"><span class="toc-number">2.15.</span> <span class="toc-text">With：将分段的查询部分连接在一起，查询结果从一部分以管道形式传递给另外一部分作为开始点。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Unwind%EF%BC%9A%E5%B0%86%E4%B8%80%E4%B8%AA%E5%88%97%E8%A1%A8%E5%B1%95%E5%BC%80%E4%B8%BA%E4%B8%80%E4%B8%AA%E8%A1%8C%E7%9A%84%E5%BA%8F%E5%88%97%EF%BC%8C%E5%88%97%E8%A1%A8%E5%8F%AF%E4%BB%A5%E4%BB%A5%E5%8F%82%E6%95%B0%E7%9A%84%E5%BD%A2%E5%BC%8F%E4%BC%A0%E5%85%A5%E3%80%82"><span class="toc-number">2.16.</span> <span class="toc-text">Unwind：将一个列表展开为一个行的序列，列表可以以参数的形式传入。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Union%EF%BC%9A%E5%B0%86%E5%A4%9A%E4%B8%AA%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E7%BB%84%E5%90%88%E8%B5%B7%E6%9D%A5%E3%80%82"><span class="toc-number">2.17.</span> <span class="toc-text">Union：将多个查询结果组合起来。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%AD%E8%A8%80%E5%87%BD%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">断言函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E9%87%8F%E5%87%BD%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">标量函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0"><span class="toc-number">3.3.</span> <span class="toc-text">列表函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E6%93%8D%E4%BD%9C"><span class="toc-number">4.</span> <span class="toc-text">模式操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E6%A6%82%E5%BF%B5"><span class="toc-number">4.1.</span> <span class="toc-text">模式概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95-1"><span class="toc-number">4.2.</span> <span class="toc-text">索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%A6%E6%9D%9F"><span class="toc-number">4.3.</span> <span class="toc-text">约束</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/11/18/GitHub%20Pages%E9%85%8D%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/" title="GitHub Pages配置自定义域名并利用Cloudflare CDN加速"><img src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;GitHub Pages配置自定义域名并利用Cloudflare CDN加速" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="GitHub Pages配置自定义域名并利用Cloudflare CDN加速"/></a><div class="content"><a class="title" href="/2023/11/18/GitHub%20Pages%E9%85%8D%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/" title="GitHub Pages配置自定义域名并利用Cloudflare CDN加速">GitHub Pages配置自定义域名并利用Cloudflare CDN加速</a><time datetime="2023-11-18T12:44:00.000Z" title="发表于 2023-11-18 20:44:00">2023-11-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/16/%E5%B7%A5%E7%A8%8B%E7%BB%8F%E6%B5%8E%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" title="工程经济期末复习"><img src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;工程经济期末复习" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="工程经济期末复习"/></a><div class="content"><a class="title" href="/2023/06/16/%E5%B7%A5%E7%A8%8B%E7%BB%8F%E6%B5%8E%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" title="工程经济期末复习">工程经济期末复习</a><time datetime="2023-06-16T06:44:08.000Z" title="发表于 2023-06-16 14:44:08">2023-06-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/22/%E5%9F%BA%E4%BA%8Ecommons-pool2%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AF%B9%E8%B1%A1%E6%B1%A0/" title="基于commons-pool2自定义对象池"><img src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;基于commons-pool2自定义对象池" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于commons-pool2自定义对象池"/></a><div class="content"><a class="title" href="/2023/03/22/%E5%9F%BA%E4%BA%8Ecommons-pool2%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AF%B9%E8%B1%A1%E6%B1%A0/" title="基于commons-pool2自定义对象池">基于commons-pool2自定义对象池</a><time datetime="2023-03-22T14:29:29.000Z" title="发表于 2023-03-22 22:29:29">2023-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/10/Hadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" title="Hadoop伪分布式集群搭建"><img src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;Hadoop伪分布式集群搭建" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hadoop伪分布式集群搭建"/></a><div class="content"><a class="title" href="/2023/03/10/Hadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" title="Hadoop伪分布式集群搭建">Hadoop伪分布式集群搭建</a><time datetime="2023-03-10T10:41:47.000Z" title="发表于 2023-03-10 18:41:47">2023-03-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/27/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="git常用命令"><img src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;git常用命令" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="git常用命令"/></a><div class="content"><a class="title" href="/2023/02/27/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="git常用命令">git常用命令</a><time datetime="2023-02-27T10:03:53.000Z" title="发表于 2023-02-27 18:03:53">2023-02-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By RippleSu</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const disqus_config = function () {
+    this.page.url = 'http://blog.ripplesu.top/2023/02/23/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/'
+    this.page.identifier = '/2023/02/23/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/'
+    this.page.title = '非关系式数据库期末复习'
+  }
+
+  const disqusReset = () => {
+    window.DISQUS && window.DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  btf.addGlobalFn('themeChange', disqusReset, 'disqus')
+
+  const loadDisqus = () =>{
+    if (window.DISQUS) disqusReset()
+    else {
+      const script = document.createElement('script')
+      script.src = 'https://.disqus.com/embed.js'
+      script.setAttribute('data-timestamp', +new Date())
+      document.head.appendChild(script)
+    }
+  }
+
+  const getCount = async() => {
+    try {
+      const eleGroup = document.querySelector('#post-meta .disqus-comment-count')
+      if (!eleGroup) return
+      const cleanedLinks = eleGroup.href.replace(/#post-comment$/, '')
+
+      const res = await fetch(`https://disqus.com/api/3.0/threads/set.json?forum=&api_key=&thread:link=${cleanedLinks}`,{
+        method: 'GET'
+      })
+      const result = await res.json()
+
+      const count = result.response.length ? result.response[0].posts : 0
+      eleGroup.textContent = count
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  if ('Valine' === 'Disqus' || !false) {
+    if (false) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+    else {
+      loadDisqus()
+      
+    }
+  } else {
+    window.loadOtherComment = loadDisqus
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>

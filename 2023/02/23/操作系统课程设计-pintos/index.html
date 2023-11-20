@@ -1,0 +1,628 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>操作系统课程设计-pintos | RippleSu's Blog</title><meta name="author" content="RippleSu"><meta name="copyright" content="RippleSu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Pintos是一个用于80x86架构的简单操作系统框架，它以非常简单的方式实现了内核线程、加载和运行用户程序以及文件系统。本次实验将完善其线程与用户程序两个部分。 1.实验准备1.1安装Docker 安装配置Docker Desktop for Windows。  然后打开cmd执行： docker run -it pkuflyingpig&#x2F;pintos bash 这将下载并运行一个包含完整的Ub">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统课程设计-pintos">
+<meta property="og:url" content="http://blog.ripplesu.top/2023/02/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1-pintos/index.html">
+<meta property="og:site_name" content="RippleSu&#39;s Blog">
+<meta property="og:description" content="Pintos是一个用于80x86架构的简单操作系统框架，它以非常简单的方式实现了内核线程、加载和运行用户程序以及文件系统。本次实验将完善其线程与用户程序两个部分。 1.实验准备1.1安装Docker 安装配置Docker Desktop for Windows。  然后打开cmd执行： docker run -it pkuflyingpig&#x2F;pintos bash 这将下载并运行一个包含完整的Ub">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.ripplesu.top/random?dir=%E7%AB%96%E5%B1%8F&%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1-pintos">
+<meta property="article:published_time" content="2023-02-23T08:48:43.000Z">
+<meta property="article:modified_time" content="2023-11-20T05:36:34.804Z">
+<meta property="article:author" content="RippleSu">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.ripplesu.top/random?dir=%E7%AB%96%E5%B1%8F&%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1-pintos"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://blog.ripplesu.top/2023/02/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1-pintos/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: RippleSu","link":"链接: ","source":"来源: RippleSu's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '操作系统课程设计-pintos',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-20 13:36:34'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="http://121.41.55.70:9000/image-lib/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('http://img.ripplesu.top/random?dir=横屏')"><nav id="nav"><span id="blog-info"><a href="/" title="RippleSu's Blog"><span class="site-name">RippleSu's Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">操作系统课程设计-pintos</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-23T08:48:43.000Z" title="发表于 2023-02-23 16:48:43">2023-02-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-20T05:36:34.804Z" title="更新于 2023-11-20 13:36:34">2023-11-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%9E%E9%AA%8C%E5%AE%9E%E8%B7%B5/">实验实践</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">12.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>41分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="操作系统课程设计-pintos"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Pintos是一个用于80x86架构的简单操作系统框架，它以非常简单的方式实现了内核线程、加载和运行用户程序以及文件系统。本次实验将完善其线程与用户程序两个部分。</p>
+<h2 id="1-实验准备"><a href="#1-实验准备" class="headerlink" title="1.实验准备"></a>1.实验准备</h2><h3 id="1-1安装Docker"><a href="#1-1安装Docker" class="headerlink" title="1.1安装Docker"></a>1.1安装Docker</h3><ul>
+<li><p>安装配置Docker Desktop for Windows。</p>
+</li>
+<li><p>然后打开cmd执行：</p>
+<p><code>docker run -it pkuflyingpig/pintos bash</code></p>
+<p>这将下载并运行一个包含完整的Ubuntu18.04以及编译、运行和调试Pintos的所有工具链（包含qemu、gcc等）的镜像。</p>
+</li>
+</ul>
+<h3 id="1-2下载并配置Pintos"><a href="#1-2下载并配置Pintos" class="headerlink" title="1.2下载并配置Pintos"></a>1.2下载并配置Pintos</h3><ul>
+<li><p>进入链接<a target="_blank" rel="noopener" href="https://pintos-os.org/cgi-bin/gitweb.cgi?p=pintos-anon;a=tree;h=refs/heads/master;hb=refs/heads/master">https://pintos-os.org/cgi-bin/gitweb.cgi?p=pintos-anon;a=tree;h=refs/heads/master;hb=refs/heads/master</a>  ，单击‘snapshot’下载pintos包并解压至本地。</p>
+</li>
+<li><p>cmd执行：</p>
+<p><code>docker run -it --rm --name pintos --mount type=bind,source=absolute/path/to/pintos/on/your/host/machine,target=/home/PKUOS/pintos pkuflyingpig/pintos bash</code></p>
+<p>将本地的pintos文件夹绑定到docker镜像,这样在vscode中修改代码后就可以马上运行测试。</p>
+</li>
+<li><p>用Vscode打开解压后的pintos文件夹，作如下修改：</p>
+<ul>
+<li>在pintos&#x2F;src&#x2F;utils&#x2F;pintos-gdb中GDBMACROS变量前增加‘~&#x2F;’（修改为完整路径）；</li>
+<li>打开pintos&#x2F;src&#x2F;utils下的Makefile,将LOADLIBES变量名编辑为LDLIBS；</li>
+<li>编辑&#x2F;utils&#x2F;pintos find_disks中的find_file函数采参数：替换kernel.bin为完整路径的（上面cmd命令中target目录pintos前的部分）kernel.bin；</li>
+<li>编辑&#x2F;utils&#x2F;Pintos.pm（362行）：替换loader.bin为完整路径的loader.bin</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3使用Pintos"><a href="#1-3使用Pintos" class="headerlink" title="1.3使用Pintos"></a>1.3使用Pintos</h3><ul>
+<li><p>运行docker镜像后，执行如下命令：<br>  <code>cd pintos/src/threads/</code></p>
+<p>  <code>make</code></p>
+<p>  <code>cd build</code></p>
+<p>  <code>pintos --</code></p>
+<p>  如果一切正常，则配置成功。</p>
+</li>
+<li><p>执行如下命令以运行pintos：  </p>
+<p><code>pintos [--gdb] -- run mytest</code></p>
+<p>如果使用了–gdb选项，则可以按如下步骤调试pintos：</p>
+<ul>
+<li><p>打开另一个cmd，输入：<br><code>docker exec -it pintos bash</code></p>
+<p><code>cd pintos/src/threads/build</code></p>
+<p><code>pintos-gdb kernel.o</code></p>
+</li>
+<li><p>在打开的gdb中输入‘debugpintos’，然后就可以自由调试pintos。</p>
+</li>
+</ul>
+</li>
+<li><p>调试完毕，则可以运行测试。<br>  例如在threads目录下执行：make check。如果一切正常，将看到测试结果。<br>  如果测试结果没有发生变化，可以先执行make clean删除原来生成的build目录，再重新运行测试。</p>
+</li>
+</ul>
+<h2 id="2-Project1：Threads"><a href="#2-Project1：Threads" class="headerlink" title="2. Project1：Threads"></a>2. Project1：Threads</h2><h3 id="2-1-实验内容"><a href="#2-1-实验内容" class="headerlink" title="2.1 实验内容"></a>2.1 实验内容</h3><h4 id="2-1-1-Alarm-Clock"><a href="#2-1-1-Alarm-Clock" class="headerlink" title="2.1.1 Alarm Clock"></a>2.1.1 Alarm Clock</h4><p>重新实现在“devices&#x2F;timer.c”中定义的“timer_sleep()”。 pintos已经提供了一个可行的实现，但是它是“忙-等待”的，即循环检查当前时间并调用<code>thread_yield()</code>直到经过足够的时间。重新实现它以避免忙等待。</p>
+<p>Function: void <strong>timer_sleep</strong> (int64_t ticks)</p>
+<ul>
+<li>暂停执行调用线程，直到时间提前至少x个计时器滴答为止。除非系统处于空闲状态，否则线程无需在精确的x滴答之后唤醒。他们等待正确的时间后，只需将其放在ready_list中即可。</li>
+<li>“timer_sleep()”的参数以计时器刻度表示，而不是以毫秒或任何其他单位表示。每秒有TIMER_FREQ定时器滴答，其中TIMER_FREQ是在“devices&#x2F;timer.h”中定义的宏。默认值为100。不建议更改此值，因为任何更改都可能导致许多测试失败。</li>
+</ul>
+<h4 id="2-1-2-Priority-Scheduling"><a href="#2-1-2-Priority-Scheduling" class="headerlink" title="2.1.2 Priority Scheduling"></a>2.1.2 Priority Scheduling</h4><p>在Pintos中实施优先级调度。当将一个线程添加到具有比当前正在运行的线程更高的优先级的就绪列表时，当前线程应立即将处理器移交给新线程。同样，当线程正在等待锁、信号量或条件变量时，应首先唤醒优先级最高的线程。线程可以随时提高或降低其自身的优先级，但是降低其优先级以使其不再具有最高优先级时，则必须立即让出CPU。</p>
+<p>线程优先级的范围是从PRI_MIN(0)到PRI_MAX(63)。较低的数字对应较低的优先级，因此优先级0是最低优先级，优先级63是最高优先级。 初始线程优先级作为参数传递给“ thread_create()”。如果没有理由选择其他优先级，则使用<code>PRI_DEFAULT(31)</code>。PRI_宏是在“threads&#x2F;thread.h”中定义的，不应更改其值。</p>
+<p>优先级调度的一个问题是“优先级反转”。分别考虑高、中和低优先级线程H，M和L。如果H需要等待L（例如，等待由L持有的锁），而M在就绪列表中，则H将永远无法获得CPU，因为低优先级线程不会获得任何CPU时间。解决此问题的部分方法是，当L持有锁时，H将其优先级“捐赠”给L。L释放（这样H可以获得）锁。</p>
+<p>实施优先级捐赠。需要考虑适用于需要优先级捐赠的所有不同情况。确保处理多个捐赠，即多个优先级捐赠给单个线程。还必须处理嵌套捐赠：如果H正在等待M持有的锁，而M正在等待L持有的锁，则M和L都应提升为H的优先级。</p>
+<p>最后，实现以下函数，这些函数允许线程检查和修改其自身的优先级。这些功能的框架在“threads&#x2F;thread.c”中提供。</p>
+<p>Function: void <strong>thread_set_priority</strong> (int new_priority )<br>将当前线程的优先级设置为new_priority。 如果当前线程不再具有最高优先级，则让出CPU。</p>
+<p>Function: int <strong>thread_get_priority</strong> (void)<br>返回当前线程的优先级。 在存在优先级捐赠的情况下，返回较高（捐赠的）优先级。</p>
+<p>无需提供任何接口即可允许线程直接修改其他线程的优先级。 </p>
+<h4 id="2-1-3-Advanced-Scheduler"><a href="#2-1-3-Advanced-Scheduler" class="headerlink" title="2.1.3 Advanced Scheduler"></a>2.1.3 Advanced Scheduler</h4><p>实现类似于BSD调度器的多级反馈队列调度程序，以减少在系统上运行作业的平均响应时间。<br>与优先级调度程序类似，高级调度程序根据优先级选择要运行的线程。但是，高级调度程序不会进行优先级捐赠。</p>
+<p>编写代码，以允许在Pintos启动时选择调度算法策略。默认情况下，优先级调度程序必须处于活动状态，但是我们必须能够通过“-mlfqs”内核选项选择BSD调度程序。传递此选项会将在“threads&#x2F;thread.h”中声明的“thread_mlfqs”设置为true。</p>
+<p>启用BSD调度程序后，线程不再直接控制自己的优先级。 应该忽略对thread_create()的优先级参数以及对thread_set_priority()的任何调用，而对thread_get_priority()的调用应返回调度程序设置的线程的当前优先级。</p>
+<p>线程优先级最初是在线程初始化时计算的。每四个时钟滴答也会重新计算一次。无论哪种情况，均由以下公式确定<br>priority &#x3D; PRI_MAX - (recent_cpu &#x2F; 4) - (nice * 2),<br>其中recent_cpu是线程最近使用的CPU时间的估计值，而nice是线程的nice值。结果应向下舍入。<br>有关高级调度器的详细实现，将在以下功能实现中说明。</p>
+<h3 id="2-2-功能实现"><a href="#2-2-功能实现" class="headerlink" title="2.2 功能实现"></a>2.2 功能实现</h3><h4 id="2-2-1-Alarm-Clock"><a href="#2-2-1-Alarm-Clock" class="headerlink" title="2.2.1 Alarm Clock"></a>2.2.1 Alarm Clock</h4><ul>
+<li>数据结构<ul>
+<li><p>thread 新增全局变量<strong>sleep_list</strong>记录所有睡眠线程：</p>
+<p><code>static struct list sleep_list;  </code></p>
+</li>
+<li><p>thread结构体新增成员变量<strong>sleep_ticks</strong>记录sleep时间，<strong>sleep_elem</strong>作为sleep_list的元素:</p>
+<p><code>struct list_elem sleep_elem;</code></p>
+<p><code>int64_t sleep_ticks;</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>然后在<code>thread_init</code>中加入sleep_list的初始化；在<code>thread_create</code>中将新线程的sleep_ticks初始化为0。</p>
+<p>调用<code>timer_sleep</code>时，如果传递的参数ticks小于等于0，则调用<code>thread_yield</code>重新竞争cpu；否则调用<code>thread_sleep</code>（新增）方法置该线程的sleep_ticks为ticks，并将该线程加入sleep_list，然后阻塞该线程。</p>
+<p>操作系统每次时钟中断（<code>timer_interrupt</code>）执行完<code>thread_tick</code>后，调用<code>thread_wake_up</code>（新增）方法。<br>该方法检查sleep_list中的每一个线程，将其sleep_ticks–，然后判断其值是否减至0。如是，则将其从sleep_list中移除，并调用<code>thread_unblock</code>唤醒该进程（该过程禁用中断）。</p>
+<h4 id="2-2-2-Priority-Scheduling"><a href="#2-2-2-Priority-Scheduling" class="headerlink" title="2.2.2 Priority Scheduling"></a>2.2.2 Priority Scheduling</h4><h5 id="优先调度高优先级线程"><a href="#优先调度高优先级线程" class="headerlink" title="优先调度高优先级线程"></a>优先调度高优先级线程</h5><p>文档中要求，当一个优先级比当前运行线程优先级更高的线程加入就序列表（ready_list）时，当前线程应立即将处理器移交给新线程。为方便实现上述调度，这里将ready_list修改为优先级队列（头大尾小，因为在<code>next_thread_to_run</code>方法中，其调用的是<code>list_pop_front</code>方法获取ready_list的front线程，即优先级最高线程应在头部）。</p>
+<ul>
+<li>新增线程比较方法<code>thread_less_priority</code>，左参数线程优先级比右参数线程优先级大返回true。该方法可作为<code>list_insert_ordered</code>等方法参数中的比较函数。这样通过<code>list_insert_ordered</code>方法插入线程到ready_list时，优先级高的线程离头部近。</li>
+<li>分别修改<code>thread_unblock</code>和<code>thread_yield</code>中插入ready_list的方法<code>list_push_back</code>为有序插入<code>list_insert_ordered</code>。</li>
+</ul>
+<p>当线程正在等待锁、信号量或条件变量时，首先唤醒优先级最高的线程。</p>
+<ul>
+<li>修改<code>sema_up</code>唤醒线程逻辑，通过<code>list_min</code>方法取出sema-&gt;waiter中优先级最高的线程（由于我的线程比较方法是左比右大返回true，这里用<code>list_min</code>而不是<code>list_max</code>），并将其唤醒。</li>
+<li>类似的，修改<code>cond_signal</code>，以唤醒等待该条件的信号量的线程中优先级最大者。此处不再赘述。</li>
+</ul>
+<h5 id="实现优先级捐赠"><a href="#实现优先级捐赠" class="headerlink" title="实现优先级捐赠"></a>实现优先级捐赠</h5><p>文档中提到“优先级反转”问题可使用“优先级捐赠”来解决，并且必须实现锁的优先级捐赠。</p>
+<p>考虑高、中和低优先级线程H，M和L。如果H需要申请某个锁，但该锁由L持有，且M在就绪列表中，则H将永远无法获得CPU，因为L不会获得任何CPU时间（只要有M存在），即L永远无法释放锁。采用优先级捐赠的方法解决上述问题：当L持有锁时，H将其优先级“捐赠”给L（即置L的优先级与H一致），这样L就能够获得CPU，也就可以释放锁。</p>
+<p>按照本人理解，L释放锁后应该回归它原本的优先级，所以需要新增一个成员以记录线程原始的、不存在捐赠情况的优先级；文档中提到“确保处理多个捐赠，其中将多个优先级捐赠给单个线程”，那么每个线程应该要有一个占有锁的列表以方便应对多个捐赠的情况（相应的，锁也要增加一个list_elem成员）。而一个锁同时可以有多个申请者，最终捐赠的优先级应当是申请者中优先级最高者（文档中提到优先级捐赠不是累加的），因此锁中需要增加一个成员记录申请者中的最大优先级；文档中还提到了嵌套捐赠的情况，线程中可以增加一个成员记录正在等待的锁（如H等待的锁A由M占有，M等待的锁B由L占有，那么当H申请锁A时可以很方便的通过M的该成员（记录着锁B）追溯到L以进行嵌套捐赠）。</p>
+<p>以下介绍锁的优先级捐赠的实现方法。</p>
+<ul>
+<li><p>数据结构：</p>
+<p>thread结构体中增加如下成员：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> origin_priority;   <span class="comment">/* 未被捐赠时的初始priority */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">list</span> <span class="title">hold_locks</span>;</span>   <span class="comment">/* 占有的锁 */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">lock</span> *<span class="title">waiting_lock</span>;</span>   <span class="comment">/* 正等待的锁 */</span></span><br></pre></td></tr></table></figure>
+<p>并在init_thread中添加对上述成员的初始化：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t-&gt;origin_priority = priority;</span><br><span class="line">list_init (&amp;t-&gt;hold_locks);</span><br><span class="line">t-&gt;waiting_lock = <span class="literal">NULL</span>;  </span><br></pre></td></tr></table></figure>
+<p>lock结构体中增加如下成员：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">list_elem</span> <span class="title">elem</span>;</span>      <span class="comment">/*hold_locks中的元素*/</span></span><br><span class="line"><span class="type">int</span> max_donate_priority;    <span class="comment">/*申请锁的线程中（捐赠者）优先级最大者*/</span></span><br></pre></td></tr></table></figure></li>
+<li><p>修改<code>lock_acquire(struct lock *lock)</code>：</p>
+<p>调用<code>lock_acquire</code>申请锁时（由于后续BSD调度不需要使用优先级捐赠，故这里thread_mlfqs需为false），如果申请的锁lock已被占有，则令当前线程的waiting_lock&#x3D;lock，然后调用<code>thread_donate_priority</code>（新增，见下）判断并处理优先级捐赠。</p>
+<p>当执行完<code>sema_down</code>，即当前线程等待到锁，置其waiting_lock为空，更新获得锁的最大优先级（max_donate_priority）为当前线程优先级，并将其加入当前线程hold_locks列表（此处thread_mlfqs也为false）。最后将lock-&gt;holder置为当前线程。<code>sema_down</code>之后的过程不可被中断。</p>
+<p>上面提到的<code>thread_donate_priority</code>方法判断是否存在优先级捐赠的情况：如果当前线程的优先级大于等待的锁的申请者中的最大优先级（max_donate_priority），则将其更新为当前线程优先级，并调用<code>thread_update_priority</code>（新增）更新锁的占有者的优先级（捐赠优先级）；然后从锁的占有者向上追溯，判断锁的占有者等待的锁（处理嵌套捐赠）。重复上述过程，直到没有等待的锁或当前线程的优先级不大于等待的锁的max_donate_priority（无需捐赠）。上述过程不可被中断。</p>
+<p>其中的<code>thread_update_priority</code>将比较当前线程原始优先级（origin_priority）与其占有锁中申请者中的优先级最大者（hold_locks列表中的max_donate_priority最大者），取其较大者作为线程的实际优先级priority。</p>
+<p>为实现上述获取hold_locks列表中的max_donate_priority最大者的功能，需新增lock的比较函数。根据比较函数的逻辑，可通过list_min或list_max方法获取最大元素。比较函数具体实现此处不再赘述。</p>
+<p>整个lock_acquire流程如下：</p>
+<img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1-pintos/lock_acquire.png">
+</li>
+<li><p>修改lock_release：</p>
+<p>调用sema_up唤醒线程前，先调用<code>thread_remove_lock</code>将锁从hold_locks列表中删除，并调用<code>thread_update_priority</code>更新当前线程优先级（原先可能存在优先级捐赠情况，即实际优先级是其他线程捐赠的优先级）。</p>
+</li>
+</ul>
+<h5 id="补充实现priority的get、set方法"><a href="#补充实现priority的get、set方法" class="headerlink" title="补充实现priority的get、set方法"></a>补充实现priority的get、set方法</h5><p>这些函数允许线程检查和修改其自身的优先级。set_priority后，如果当前线程不再具有最高优先级，则让出CPU。</p>
+<ul>
+<li>Function: void <strong>thread_set_priority</strong> (int new_priority )</li>
+</ul>
+<p>该过程不可被中断。如果不存在优先级捐赠情况，或新设置的优先级大于原来的实际优先级（可能是被捐赠的优先级），则将当前线程的实际优先级设置为new_priority。然后调用<code>thread_yield</code>重新竞争CPU。</p>
+<ul>
+<li><p>Function: int <strong>thread_get_priority</strong> (void)</p>
+<p>返回当前线程的实际优先级priority。</p>
+</li>
+</ul>
+<h4 id="2-2-3-Advanced-Scheduler"><a href="#2-2-3-Advanced-Scheduler" class="headerlink" title="2.2.3 Advanced Scheduler"></a>2.2.3 Advanced Scheduler</h4><p>这个部分整体上只需在正确的时间按文档要求套用公式计算对应的值即可。这里只维持一个优先级队列即ready_list。</p>
+<p>每四个ticks使用以下公式重新计算一次所有线程优先级：</p>
+<p><code>priority = PRI_MAX - (recent_cpu / 4) - (nice * 2)</code></p>
+<p>每个线程有一个整数nice值，该值确定该线程与其他线程应该有多“不错”。nice为零不会影响线程优先级。正的nice会降低线程的优先级，并导致该线程放弃原本可以接收的CPU时间。nice值在-20~20之间。</p>
+<p>recent_cpu测量线程“最近”接收到的CPU时间。在每个tick中，运行线程的recent_cpu递增1。每个线程的recent_cpu每秒一次以下述方式更新：</p>
+<p><code>recent_cpu = (2*load_avg)/(2*load_avg + 1) * recent_cpu + nice</code>.</p>
+<p>load_avg估计过去一分钟准备运行的平均线程数。它在引导时初始化为0，并每秒按如下公式重新计算一次：</p>
+<p><code>load_avg = (59/60)*load_avg + (1/60)*ready_threads</code>.</p>
+<p>其中ready_threads是在更新时正在运行或准备运行的线程数（不包括空闲线程）。  </p>
+<p>在上面的公式中，priority，nice和ready_threads是整数，而recent_cpu和load_avg 是实数。Pintos在内核中并不支持浮点运算。因此必须使用整数来模拟实际数量的计算。</p>
+<ul>
+<li><p>Fixed-Point Real Arithmetic</p>
+<p>本实验中，将带符号的32位整数的最低14位指定为小数位，这样整数x就表示实数x&#x2F;2^14。这被称为17.14定点数字表示形式，因为小数点前有17位，小数点后有14位，还有一个符号位。具体实现参考文档中给出的计算方法，以宏定义的方式实现。详情参见threads\fpra.h。</p>
+</li>
+</ul>
+<p>基于上述计算方法，实现调度方法如下：</p>
+<ul>
+<li><p>数据结构：</p>
+<ul>
+<li><p>thread结构体内新增成员：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> nice; <span class="comment">/* 该值确定该线程与其他线程应该有多“不错” */</span></span><br><span class="line">fixed_point recent_cpu;  <span class="comment">/* 线程最近使用的CPU时间的估计值 */</span></span><br></pre></td></tr></table></figure>
+<p>并在init_thread中初始化：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t-&gt;nice = <span class="number">0</span>;</span><br><span class="line">t-&gt;recent_cpu = FPRA_CONVERT_INT(<span class="number">0</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>thread.c增加全局变量：</p>
+<p><code>fixed_point load_avg;  /*系统平均负载*/</code></p>
+<p>并在thread_start中初始化：</p>
+<p><code>load_avg = FPRA_CONVERT_INT (0);</code></p>
+</li>
+</ul>
+</li>
+<li><p>修改timer_interrupt，使其完成以下功能：</p>
+<p>对正在执行的非空闲线程的recent_cpu+1（通过新增方法<code>mlfqs_thread_recent_cpu_plus_one</code>），然后判断ticks：如果到达TIMER_FREQ（一秒）的倍数，更新一次load_avg和所有非闲线程(all_list中)的recent_cpu（通过新增方法<code>mlfqs_thread_update_per_second</code>）；如果为4的倍数，只重新计算并更新所有非闲线程优先级（通过新增方法<code>mlfqs_thread_update_priority</code>）。</p>
+<p>上述几个方法只需用fpra.h中定义的计算方法套用文档中给出的计算公式即可。详情参见源代码。需要注意的是，当前正运行的非闲线程也应该计入ready_threads；计算完priority后需要将其调整为处于PRI_MIN至PRI_MAX的范围内。</p>
+<p>流程如下：</p>
+<img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/操作系统课程设计-pintos/流程图mlfqs.png"></li>
+<li><p>最后，完善有关值的get、set方法：</p>
+<ul>
+<li><p><code>thread_set_nice(int nice)</code>：<br>将当前线程的nice值设置为nice，并根据新值调用<code>mlfqs_thread_update_priority</code>重新计算当前线程的优先级。然后调用<code>thread_yield</code>重新竞争CPU。</p>
+</li>
+<li><p><code>thread_get_nice(void)</code>:返回当前线程nice值即可。</p>
+</li>
+<li><p><code>thread_get_load_avg</code>:返回当前系统平均负载的100倍，四舍五入到最接近的整数：<br><code>FPRA_TO_INT_TO_NEAREST (FPRA_MULT_INT (load_avg, 100))</code></p>
+</li>
+<li><p><code>thread_get_recent_cpu</code>:返回当前线程的recent_cpu值的100倍，四舍五入到最接近的整数:<br><code>FPRA_TO_INT_TO_NEAREST (FPRA_MULT_INT (thread_current ()-&gt;recent_cpu, 100))</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-测试结果"><a href="#2-3-测试结果" class="headerlink" title="2.3 测试结果"></a>2.3 测试结果</h3><ul>
+<li>在线判题结果：<img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1-pintos/threads.png"></li>
+</ul>
+<h2 id="3-Project2：User-Programs"><a href="#3-Project2：User-Programs" class="headerlink" title="3. Project2：User Programs"></a>3. Project2：User Programs</h2><h3 id="3-1-实验内容"><a href="#3-1-实验内容" class="headerlink" title="3.1 实验内容"></a>3.1 实验内容</h3><h4 id="3-1-1-Process-Termination-Messages"><a href="#3-1-1-Process-Termination-Messages" class="headerlink" title="3.1.1 Process Termination Messages"></a>3.1.1 Process Termination Messages</h4><p>每当用户进程终止时，不管是因为它调用exit或任何其他原因，需打印该进程的名称和退出代码，其格式类似于由printf（“％s：exit（％d）\ n”，… ）;。 打印的名称应为传递给process_execute（）的全名，并省略命令行参数。当不是用户进程的内核线程终止时，或者在调用“halt”系统调用时，请勿打印这些消息。当进程无法加载时，此消息是可选的。</p>
+<h4 id="3-1-2-Argument-Passing"><a href="#3-1-2-Argument-Passing" class="headerlink" title="3.1.2 Argument Passing"></a>3.1.2 Argument Passing</h4><p>当前，process_execute()不支持将参数传递给新进程。 通过扩展process_execute（）来实现此功能，以使它不仅将程序文件名作为参数，而且还将按空格分隔。第一个单词是程序名称，第二个单词是第一个参数，依此类推。也就是说，process_execute（“grep foo bar”）应该运行grep，并传递两个参数foo和bar。</p>
+<h4 id="3-1-3-System-Calls"><a href="#3-1-3-System-Calls" class="headerlink" title="3.1.3 System Calls"></a>3.1.3 System Calls</h4><p>在“userprog&#x2F;syscall.c”中实现系统调用处理程序。它将需要检索系统调用号，然后检索系统调用参数，并执行适当的操作。</p>
+<p>实现 halt~close 13个系统调用。列出的原型是由包含“lib&#x2F;user&#x2F;syscall.h”的用户程序看到的原型。（此头文件以及“lib&#x2F;user”中的所有其他头文件仅供用户程序使用。）每个系统调用的系统调用号在“lib&#x2F;syscall-nr.h”中定义。</p>
+<p>要实现系统调用，需要提供在用户虚拟地址空间中读取和写入数据的方法。在获得系统调用号之前需要此功能，因为系统调用号位于用户的虚拟地址空间中的用户堆栈上。如果用户提供了无效的指针，指向内核内存的指针或部分位于这些区域之一的块，应该能够检查出并通过终止用户进程来处理这些情况。</p>
+<p>必须同步系统调用，以便任意数量的用户进程可以进行调用。特别地，同时从多个线程调用“filesys”目录中提供的文件系统代码是不安全的。系统调用实现必须将文件系统代码视为临界区。不要忘记process_execute()也可以访问文件。</p>
+<p>用户程序无法执行的任何操作都不会导致OS崩溃、死机、断言失败或其他故障。强调这一点很重要：测试将尝试以多种方式中断系统调用。需要考虑所有极端情况并加以处理。用户程序应该能够导致OS停止的唯一方法是调用“halt”系统调用。</p>
+<p>如果系统调用传递了无效的参数，则可接受的选项包括返回错误值（对于那些返回值的调用），返回未定义的值或终止过程。</p>
+<h4 id="3-1-4-Denying-Writes-to-Executables"><a href="#3-1-4-Denying-Writes-to-Executables" class="headerlink" title="3.1.4 Denying Writes to Executables"></a>3.1.4 Denying Writes to Executables</h4><p>添加代码以拒绝写入用作可执行文件的文件。如果进程尝试运行当时正在磁盘上进行更改的代码，结果将无法预测。</p>
+<p>可以使用file_deny_write（）防止写入打开的文件。在文件上调用file_allow_write（）将重新启用它们（除非文件被另一个打开程序拒绝写入）。关闭文件也会重新启用写操作。因此，要拒绝写入进程的可执行文件，只要进程仍在运行，就必须保持打开状态。</p>
+<h3 id="3-2-功能实现"><a href="#3-2-功能实现" class="headerlink" title="3.2 功能实现"></a>3.2 功能实现</h3><h4 id="3-2-1-Process-Termination-Messages"><a href="#3-2-1-Process-Termination-Messages" class="headerlink" title="3.2.1 Process Termination Messages"></a>3.2.1 Process Termination Messages</h4><ul>
+<li><p>数据结构：<br>thread结构体中增加成员：</p>
+<p><code>int exit_code; </code> &#x2F;&#x2F;退出代码</p>
+<p>在<code>init_thread</code>中将其初始化为0：</p>
+<p><code>t-&gt;exit_code = 0;</code></p>
+<p>该值为0表示成功退出，非零值表示错误。</p>
+</li>
+</ul>
+<p>然后在<code>thread_exit</code>方法执行完<code>process_exit</code>后，添加如下代码，按文档要求打印出进程的信息：<br><code>printf(&quot;%s: exit(%d)\n&quot;,thread_name(),thread_current()-&gt;exit_code);</code></p>
+<p>后续测试中发现按我写的代码逻辑，无条件打印退出信息将导致测试点“exec-missing”失败。故后续将修改为子进程加载失败，在退出时不打印上述错误信息。</p>
+<h4 id="3-2-2-Argument-Passing"><a href="#3-2-2-Argument-Passing" class="headerlink" title="3.2.2 Argument Passing"></a>3.2.2 Argument Passing</h4><h5 id="process-execute"><a href="#process-execute" class="headerlink" title="process_execute"></a>process_execute</h5><p>文档中提到，系统提供的process_execute函数不支持参数传递。它将程序文件名作为一个整体传递给thread_create作为程序名称。例如<code>process_execute（&quot;grep foo bar&quot;）</code>，它将”grep foo bar”整体作为程序的名称。而要求的实现是以”grep”作为程序名，并传递”foo bar”两个参数（程序名位于argv[0]）。</p>
+<p>所以，修改<code>process_execute</code>以实现上述功能：</p>
+<p>定义fn_copy、fn_copy1作为file_name的两个copy。其中fn_copy1通过strtok_r函数按空格分割为程序名与参数两部分，第一部分（程序名）存储在fn_copy1中作为参数传递给<code>thread_create</code>作为程序名称。由于<code>start_process</code>函数仍需要程序名，因此将fn_copy（file_name的完整拷贝）同样作为thread_create的参数。该参数将传递给start_process方法。</p>
+<h5 id="start-process"><a href="#start-process" class="headerlink" title="start_process"></a>start_process</h5><p>start_process方法的任务是以文件名加载一个 ELF 格式的可执行文件（ELF是Linux、Solaris和许多其他操作系统使用的文件格式，用于目标文件、共享库和可执行文件），同时传递正确的参数。</p>
+<p>start_process方法中同样以fn_copy作为file_name的拷贝，并执行与上述类似的分割方法。分割出的程序名存储在proc_name中作为参数传递给load方法，参数部分则存储在args中。load方法将返回加载是否成功的信息，并保存在success中。如果<code>success == true</code>，则开始解析参数，并将其放在堆栈上;如果执行失败，则置当前线程exit_code为-1，然后调用<code>thread_exit</code>。无论成功与否，最后都需要释放申请的字符串空间。</p>
+<p>例如处理以下示例命令的参数：“&#x2F;bin&#x2F;ls -l foo bar” 其过程如下：<br>首先，将命令分解为单词：“&#x2F;bin &#x2F;ls”，“-l”，“foo”，“bar”，并将单词放在堆栈的顶部。<br>然后，按从右到左的顺序将每个字符串的地址以及一个空指针哨兵压入堆栈。这些是“argv”的元素。空指针sentinel可以确保C标准所要求的argv[argc]是空指针。该命令确保“argv[0]”位于最低虚拟地址。字对齐的访问比未对齐的访问要快，因此为了获得最佳性能，在第一次压入之前将堆栈指针向下舍入为4的倍数。<br>然后，依次将“argv”（“argv[0]”的地址）和“argc”入栈。<br>最后，推送一个伪造的“返回地址”。</p>
+<p>详细代码以及每一步的意义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(success)&#123;</span><br><span class="line">  <span class="type">int</span> argc = <span class="number">0</span>;   <span class="comment">/* 参数个数 */</span></span><br><span class="line">  <span class="type">void</span>* argv[<span class="number">128</span>];<span class="comment">/* pintos实用程序可以传递给内核的命令行参数有128个字节的不相关限制。*/</span></span><br><span class="line">  <span class="type">char</span>* word; <span class="comment">/* 单词 */</span></span><br><span class="line">  <span class="comment">/*用户虚拟内存的范围从虚拟地址0到“PHYS_BASE”，默认为“ 0xc0000000”（3GB）。内核虚拟内存占用了其余的虚拟地址空间，从“PHYS_BASE”到最大4GB。</span></span><br><span class="line"><span class="comment">  应在用户虚拟地址空间的最顶部，即虚拟地址“PHYS_BASE”（在“threads/vaddr.h”中定义）下方的页面中开始堆栈。*/</span></span><br><span class="line">  <span class="comment">/*堆栈指针初始化为PHYS_BASE*/</span></span><br><span class="line">  if_.esp = PHYS_BASE;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 解析参数，将其放在栈顶。顺序无关紧要，因为它们将通过指针引用。*/</span></span><br><span class="line">  <span class="comment">/* char *strtok_r(char *str, const char *delim, char **saveptr);</span></span><br><span class="line"><span class="comment">    第一次调用strtok_r时，str参数必须指向待提取的字符串。</span></span><br><span class="line"><span class="comment">    连续调用时，str赋值为NULL。saveptr为上次调用后剩余的字符串。 */</span></span><br><span class="line">  <span class="keyword">for</span> (word = strtok_r (fn_copy, <span class="string">&quot; &quot;</span>, &amp;args); word != <span class="literal">NULL</span>; word = strtok_r (<span class="literal">NULL</span>, <span class="string">&quot; &quot;</span>, &amp;args)) &#123;</span><br><span class="line">    <span class="type">size_t</span> arg_len = <span class="built_in">strlen</span>(word) + <span class="number">1</span>; <span class="comment">//&#x27;\0&#x27;</span></span><br><span class="line">    if_.esp -= arg_len; <span class="comment">//地址空间从PHYS_BASE向下延伸</span></span><br><span class="line">    <span class="built_in">memcpy</span>(if_.esp, word, arg_len);<span class="comment">//将word复制到对应地址空间</span></span><br><span class="line">    argv[argc++] = if_.esp; <span class="comment">//通过指针引用参数</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 单词对齐的访问比未对齐的访问要快，因此为了获得最佳性能,在第一次压入之前将堆栈指针向下舍入为4的倍数。 */</span></span><br><span class="line">  <span class="comment">/* uintptr_t能够存储指针的无符号整数类型。这通常意味着它与指针的大小相同。*/</span></span><br><span class="line">  <span class="type">uintptr_t</span> tmp = (<span class="type">uintptr_t</span>)if_.esp; </span><br><span class="line">  <span class="keyword">if</span> (tmp % <span class="number">4</span> != <span class="number">0</span>)</span><br><span class="line">    tmp -= tmp % <span class="number">4</span>;</span><br><span class="line">  if_.esp = (<span class="type">void</span> *)tmp;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 按从右到左的顺序将每个字符串的地址以及一个空指针哨兵压入堆栈。</span></span><br><span class="line"><span class="comment">  这些是“argv”的元素。空指针sentinel(哨兵)可以确保C标准所要求的argv[argc]是空指针。</span></span><br><span class="line"><span class="comment">  该顺序确保“argv[0]”位于最低虚拟地址。*/</span></span><br><span class="line">  <span class="type">size_t</span> ptr_size = <span class="keyword">sizeof</span>(<span class="type">void</span> *); <span class="comment">//指针大小</span></span><br><span class="line">  if_.esp -= ptr_size;</span><br><span class="line">  <span class="built_in">memset</span>(if_.esp, <span class="number">0</span>, ptr_size); <span class="comment">//空指针</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = argc<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">    if_.esp -= ptr_size;</span><br><span class="line">    <span class="built_in">memcpy</span>(if_.esp, &amp;argv[i], ptr_size);<span class="comment">//依次将参数地址入栈</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 然后，依次将“argv”（“argv[0]”的地址）和“argc”入栈。*/</span></span><br><span class="line">  if_.esp -= ptr_size;</span><br><span class="line">  *(<span class="type">uintptr_t</span> *)if_.esp = ((<span class="type">uintptr_t</span>)if_.esp + ptr_size); </span><br><span class="line">  if_.esp -= ptr_size;</span><br><span class="line">  *(<span class="type">int</span> *)if_.esp = argc;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 最后，推送一个伪造的“返回地址”：</span></span><br><span class="line"><span class="comment">  尽管入口函数将永远不会返回，但其堆栈框架必须具有与其他任何结构相同的结构。 */</span></span><br><span class="line">  if_.esp -= ptr_size;</span><br><span class="line">  <span class="built_in">memset</span>(if_.esp, <span class="number">0</span>, ptr_size);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* If load failed, quit. */</span></span><br><span class="line">palloc_free_page (file_name);  </span><br><span class="line">palloc_free_page (fn_copy);</span><br><span class="line"><span class="keyword">if</span> (!success) &#123;</span><br><span class="line">  thread_current()-&gt;exit_code = <span class="number">-1</span>;</span><br><span class="line">  thread_exit ();    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-2-3-System-Calls"><a href="#3-2-3-System-Calls" class="headerlink" title="3.2.3 System Calls"></a>3.2.3 System Calls</h4><h5 id="用户内存访问"><a href="#用户内存访问" class="headerlink" title="用户内存访问"></a>用户内存访问</h5><p>作为系统调用的一部分，内核必须经常通过用户程序提供的指针访问内存。内核必须非常小心，因为用户可能传递一个空指针，一个指向未映射虚拟内存的指针或一个指向内核虚拟地址空间的指针（在PHYS_BASE之上）。必须通过终止有问题的进程并释放其资源，拒绝所有这些类型的无效指针，而不会损害内核或其他正在运行的进程。<br>文档提供了两种设计思路，这里选择第二种（但又不完全是，此处实现可能并不完善，虽然能过测试点）。</p>
+<p>检查用户指针的<code>check_user_ptr</code>方法实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> * </span><br><span class="line"><span class="title function_">check_user_ptr</span><span class="params">(<span class="type">void</span> *ptr)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/* 判断传入的地址是否是用户可用的虚拟地址（地址是否在PHYS_BASE以下）*/</span></span><br><span class="line">  <span class="keyword">if</span> (!is_user_vaddr(ptr)) &#123;</span><br><span class="line">    kill_process();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/* 判断虚拟地址及其上4字节的位置的内容是否正确，</span></span><br><span class="line"><span class="comment">    若不正确则调用kill_process()函数异常退出。否则将这个指针视作是正确的。 */</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123; </span><br><span class="line">    <span class="keyword">if</span> (get_user(ptr + i) == <span class="number">-1</span>) &#123;</span><br><span class="line">      kill_process();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ptr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该方法首先通过<code>is_user_vaddr</code>（定义在threads&#x2F;vaddr.h中）检查用户指针是否指向“PHYS_BASE”下方；然后通过文档中提供的<code>get_user</code>函数（从所给地址读取一个字节，如果成功则返回字节代表的值，否则返回-1）判断该地址及其上4字节（每个系统调用参数在堆栈中占用4个字节）地址是否可用。如是，则认为该指针是正确的，将其返回；否则调用<code>kill_process</code>（新增）将当前线程的exit_code置为-1，然后调用<code>thread_exit</code>终止该进程。</p>
+<p>以下所有的系统调用获取参数时都需要通过该方法检查用户指针。</p>
+<p>无效的用户指针将导致“页面错误”，因此需修改page_fault方法。文档中提到内核中的页面错误仅将eax设置为0xffffffff（-1）并将其以前的值复制到eip中，故修改page_fault方法如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">user = (f-&gt;error_code &amp; PF_U) != <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (!user) &#123;</span><br><span class="line">  f-&gt;eip =  f-&gt;eax;</span><br><span class="line">  f-&gt;eax = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外，page_fault的最后调用了<code>kill</code>方法，该方法中如果用户引发了段错误将调用<code>thread_exit</code>结束用户进程。而我在线程初始化时将exit_code初始化为0（正常退出），此处显然为异常退出，应在thread_exit前将当前线程的exit_code置为-1（否则bad开头的若干测试点无法通过，因为这些测试直接访问NULL引发了段错误）。</p>
+<h5 id="系统调用基础结构"><a href="#系统调用基础结构" class="headerlink" title="系统调用基础结构"></a>系统调用基础结构</h5><p>本小节按照文档给出的推荐实现步骤，完成系统调用基础结构，实现halt、exit、write（部分）系统调用，使用户进程可以正常运行。</p>
+<ul>
+<li><p>改写syscall_handler，使其能够检索系统调用号，并根据系统调用号转移到对应的系统调用。</p>
+<p>系统调用号在调用者的堆栈指针的32位字中，第一个参数在下一个更高地址的32位字中，依此类推。调用syscall_handler()的调用者的堆栈指针可以作为传递给它的“struct intr_frame”的“esp”成员访问。<br>先获取堆栈指针并通过<code>check_user_ptr</code>检查其合法性，然后转换为int*类型并将其解引用得到系统调用号（以下系统调用获取参数的过程与此类似）。再通过switch-case语句转移到对应的系统调用（系统调用号在“lib&#x2F;syscall-nr.h”中定义）。后续增加的系统调用只需在switch-case中增加对应的语句即可。</p>
+</li>
+<li><p>System Call: void halt (void)</p>
+<p>halt系统调用很简单，只需通过调用“shutdown_power_off()”（在“threads&#x2F;init.h”中声明）终止Pintos。如下：</p>
+</li>
+<li><p>System Call: void exit (int status)</p>
+<p>检查并获取参数status（系统调用号即intr_frame-&gt;esp的高32位字），将其作为当前线程的exit_code的值。然后调用thread_exit终止当前用户程序。按照惯例，状态状态为0表示成功，非零值表示错误。</p>
+</li>
+<li><p>System Call: int write (int fd, const void *buffer, unsigned size)</p>
+<p>首先依次获取各个参数指针并检查其合法性，然后将其解引用。需要注意的是buf不仅要检查其指针，还需检查其字符串本体所在的地址空间。</p>
+<p>如果文件描述符<code>fd == 1</code>，即写入标准输出，按照文档要求用<code>putbuf</code>一次性将size个字节从buffer写入打开的文件fd，并返回size。</p>
+<p>fd不是1的情况将在后面文件系统调用部分补充。</p>
+</li>
+</ul>
+<p>至此，只需将process_wait（）更改为无限循环，用户进程至少可以正常运行。后面将完善各个系统调用。</p>
+<h5 id="exec与wait"><a href="#exec与wait" class="headerlink" title="exec与wait"></a>exec与wait</h5><p>exec系统调用的文档描述中提到“父进程在知道子进程是否成功加载其可执行文件之前不能从exec返回。您必须使用适当的同步来确保这一点”，在wait系统调用的描述中也大量提到父子进程的要求。故本小节的任务是实现父子进程，并实现与之相关的exec与wait系统调用。</p>
+<ul>
+<li><p>数据结构：</p>
+<p>根据文档中描述，父进程需要知道子进程是否成功加载其可执行文件，并且在其加载完成之前不能返回。故在thread结构体中增加一个父进程指针<code>parent</code>、<code>sema_exec</code>信号量使父进程等待子进程的执行结果、<code>exec_success</code>标志子进程是否加载成功。<br>文档中又提到，“等待子进程pid并检索子进程的退出状态.如果pid仍然有效，请等待直到终止”、“进程可以生成任意数量的子代，以任何顺序等待它们”，这说明需要有一个列表记录所有子进程，并且对于每一个子进程需要有一个信号量以实现父子进程的同步、在子进程退出后父进程仍能检索子进程的相关信息。因此这里设计<code>child_info</code>结构体记录子进程需要向父进程传递的必要的信息，并在thread结构体中增加<code>children</code>列表记录其所有子进程。为方便子进程向父进程传递信息，且使得子进程退出后父进程仍能知晓子进程的相关信息，在thread结构体中增加child_info类型<code>as_child</code>成员，该成员在进程退出后不会马上销毁。</p>
+<p>有关这些数据结构的详细使用，将在下面描述。</p>
+<p>thread结构体中新增：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">thread</span> *<span class="title">parent</span>;</span>             <span class="comment">/* 父进程指针 */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">semaphore</span> <span class="title">sema_exec</span>;</span>        <span class="comment">/* 等待子进程加载其可执行文件 */</span></span><br><span class="line"><span class="type">bool</span> exec_success;                 <span class="comment">/* 加载是否成功 */</span>  </span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">list</span> <span class="title">children</span>;</span>              <span class="comment">/* 子进程列表 */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">child_info</span> *<span class="title">as_child</span>;</span>       <span class="comment">/* 作为子进程提供给父进程的信息 */</span></span><br></pre></td></tr></table></figure>
+<p>child_info结构体：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">child_info</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="type">tid_t</span> tid;                  <span class="comment">/* 子进程tid */</span></span><br><span class="line">  <span class="type">bool</span> is_waiting;            <span class="comment">/* 父进程是否在等待该子进程 */</span></span><br><span class="line">  <span class="type">int</span> exit_code;              <span class="comment">/* 系统调用exit中的status */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">semaphore</span> <span class="title">wait_sema</span>;</span> <span class="comment">/* 同步父子进程 */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_elem</span> <span class="title">elem</span>;</span>      <span class="comment">/* children中的list_elem */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在thread_create中初始化这些成员：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">t-&gt;as_child = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> child_info));</span><br><span class="line">t-&gt;as_child-&gt;tid = tid;</span><br><span class="line">t-&gt;as_child-&gt;is_waiting = <span class="literal">false</span>;</span><br><span class="line">t-&gt;as_child-&gt;exit_code = <span class="number">0</span>;</span><br><span class="line">sema_init(&amp;t-&gt;as_child-&gt;wait_sema, <span class="number">0</span>);</span><br><span class="line">sema_init(&amp;t-&gt;sema_exec, <span class="number">0</span>);</span><br><span class="line">t-&gt;parent = thread_current();</span><br><span class="line">list_push_back(&amp;t-&gt;parent-&gt;children, &amp;t-&gt;as_child-&gt;elem);</span><br></pre></td></tr></table></figure></li>
+<li><p>System Call: pid_t exec (const char *cmd_line)</p>
+<p>系统调用的任务是运行其名称在 cmd_line 中给出的可执行文件，并传递任何给定的参数，返回新进程的进程ID（pid）。 如果程序由于任何原因无法加载或运行，则必须返回pid -1，否则不应为有效pid。</p>
+<p>用户指针的检查与参数的获取上面已经多次描述，以下不再叙述。<br>该系统调用将cmd_line中给出的可执行文件名以及参数一起传递给<code>process_execute</code>，该方法将根据加载的成功与否返回新进程的pid（pintos中为单线程，故pid也即tid）或-1，返回值写入到f-&gt;eax（函数返回值的80x86约定是将它们放在“EAX”寄存器中。 返回值的系统调用可以通过修改struct intr_frame的“eax”成员来实现）。<br><code>process_execute</code>方法的基本实现已经在3.2.2中描述。下面给出其在thread_create后增加的部分：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">tid = thread_create (fn_copy1, PRI_DEFAULT, start_process, fn_copy);</span><br><span class="line">···</span><br><span class="line">  <span class="comment">/* 由于未知原因此处sema_exec可能尚未初始化，导致assertion(is_tail) failed </span></span><br><span class="line"><span class="comment">    故这里手动判断并将其初始化 */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">list_elem</span> *<span class="title">tail</span> =</span> list_tail(&amp;thread_current()-&gt;sema_exec.waiters);</span><br><span class="line"><span class="keyword">if</span>(tail-&gt;prev == <span class="literal">NULL</span>)</span><br><span class="line">  sema_init(&amp;thread_current()-&gt;sema_exec,<span class="number">0</span>);</span><br><span class="line">sema_down(&amp;thread_current()-&gt;sema_exec);</span><br><span class="line"><span class="keyword">if</span> (!thread_current()-&gt;exec_success) &#123;</span><br><span class="line">  <span class="keyword">return</span> TID_ERROR;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> tid;</span><br></pre></td></tr></table></figure>
+<p>在创建子进程之后，为等待子进程加载其可执行文件的结果，这里调用<code>sema_down</code>阻塞父进程，等待子进程信号。然后父进程根据子进程修改的exec_success值返回相应的结果给exec系统调用。<br>在<code>start_process</code>中，若子进程成功加载（load返回true），将通过其父进程指针parent修改父进程的exec_success字段为true，并用<code>sema_up</code>唤醒父进程；若加载失败，则置自身的exit_code为-1，然后唤醒父进程，再调用<code>thread_exit</code>退出。</p>
+</li>
+<li><p>System Call: int wait (pid_t pid)</p>
+<p>等待子进程pid并检索子进程的退出状态。文档中建议根据函数顶部的注释实现process_wait()，然后再根据process_wait()实现wait系统调用。</p>
+<p>wait系统调用中只需检查并获取参数中的pid，将其作为参数传递给process_exit执行，执行的返回值写入到f-&gt;eax。</p>
+<p><code>process_wait</code>方法将返回子进程的退出状态（exit_code）。<br>该方法首先根据系统调用中给出的pid(tid)检索该进程的children列表，如果找到对应pid的子进程，且<code>is_waiting == false</code>（父进程首次在pid上调用过wait），则将子进程的is_waiting字段置为true，然后调用sema_down等待该子进程终止。而如果is_waiting值为ture（文档原话：调用“wait”的进程已经在pid上调用过wait了），则根据文档要求，立即返回-1且不再等待。<br>如果检索完children列表但未找到对应pid的子进程，说明pid不是父进程的直接子级，则立即返回-1。<br>最后将pid从父进程的children列表中移除，并返回pid的exit_code给wait系统调用。</p>
+<p>具体实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">process_wait</span> <span class="params">(<span class="type">tid_t</span> child_tid)</span> </span><br><span class="line">&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">thread</span> *<span class="title">cur</span> =</span> thread_current();</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list</span> *<span class="title">children</span> =</span> &amp;cur-&gt;children;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_elem</span> *<span class="title">e</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">child_info</span> *<span class="title">child</span>;</span></span><br><span class="line">  <span class="keyword">for</span> (e = list_begin (children); e != list_end (children); e = list_next (e))</span><br><span class="line">  &#123;</span><br><span class="line">    child = list_entry(e, <span class="keyword">struct</span> child_info, elem);</span><br><span class="line">    <span class="keyword">if</span> (child-&gt;tid == child_tid) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!child-&gt;is_waiting) &#123;</span><br><span class="line">        child-&gt;is_waiting = <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">/* 等待子进程终止。然后，返回子进程传递给exit的状态 */</span></span><br><span class="line">        sema_down(&amp;child-&gt;wait_sema); </span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">/* 调用“wait”的进程已经在pid上调用过wait了。*/</span></span><br><span class="line">      <span class="keyword">else</span> &#123; </span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/* pid不是父进程的直接子级 */</span></span><br><span class="line">  <span class="keyword">if</span> (e == list_end(children))</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  <span class="comment">/* 将其从父进程的children中移除 */</span></span><br><span class="line">  list_remove(e);</span><br><span class="line">  <span class="keyword">return</span> child-&gt;exit_code;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>文档中还提到“父进程等待在父进程调用wait之前已经终止的子进程是完全合法的，但是内核仍必须允许父进程检索其子进程的退出状态，或者得知该子进程已被终止”。即如果调用wait前pid已经终止，此时再调用<code>sema_wait</code>将导致父进程忙等（终止的进程不可能再调用<code>sema_up</code>）。故子进程退出时需传递相关信息。</p>
+<p>在thread_exit中添加如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cur-&gt;as_child-&gt;exit_code = cur-&gt;exit_code;</span><br><span class="line">sema_up(&amp;cur-&gt;as_child-&gt;wait_sema);</span><br></pre></td></tr></table></figure>
+<p>这样就能避免上述情况。</p>
+</li>
+</ul>
+<h5 id="文件系统调用"><a href="#文件系统调用" class="headerlink" title="文件系统调用"></a>文件系统调用</h5><p>文档中提到，“您必须同步系统调用，以便任意数量的用户进程可以进行调用。特别地，同时从多个线程调用“filesys”目录中提供的文件系统代码是不安全的。您的系统调用实现必须将文件系统代码视为临界区。”</p>
+<p>我用锁机制实现上述功能：<br>在syscall.h中加入：</p>
+<p><code>struct lock file_lock;  /* 用于互斥访问file */</code></p>
+<p>然后在syscall_init中完成对锁的初始化：</p>
+<p><code>lock_init(&amp;file_lock);</code></p>
+<p>以下系统调用对文件操作时都需要先加锁、后释放锁。</p>
+<p>pintos在“filesys”目录下提供了一个简单但完整的文件系统，部分系统调用只需在加锁后调用对应函数即可。</p>
+<ul>
+<li><p>System Call: bool create (const char *file, unsigned initial_size)</p>
+<p>创建一个名为file的新文件，其初始大小为 initial_size个字节。如果成功，则返回true，否则返回false。</p>
+<p>filesys_create已经提供了相关的实现。该系统调用只需获取并检查参数、加锁、调用<code>filesys_create</code>并将返回值写入f-&gt;eax、释放锁即可。</p>
+<p>如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> </span><br><span class="line"><span class="title function_">syscall_create</span><span class="params">(<span class="keyword">struct</span> intr_frame *f)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> *file_name = *(<span class="type">char</span> **)check_user_ptr(f-&gt;esp + ptr_size);</span><br><span class="line">  check_user_ptr(file_name);</span><br><span class="line">  <span class="type">int</span> file_size = *(<span class="type">int</span> *)check_user_ptr(f-&gt;esp + <span class="number">2</span> * ptr_size);</span><br><span class="line"></span><br><span class="line">  lock_acquire(&amp;file_lock);  </span><br><span class="line">  f-&gt;eax = filesys_create(file_name, file_size);</span><br><span class="line">  lock_release(&amp;file_lock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>System Call: bool remove (const char *file)</p>
+<p>删除名为file的文件。如果成功，则返回true，否则返回false。</p>
+<p>具体实现同上，只需略去file_size参数、换为执行<code>filesys_remove</code>即可，此处不再赘述。</p>
+</li>
+<li><p>进程与文件</p>
+<p>下面的系统调用中提到，每个进程可以打开多个文件，每个打开的文件有一个&gt;1的文件描述符，每个进程有一组独立的文件描述符。还需要根据文件描述符找到打开的文件。</p>
+<p>为实现这些功能，增加如下数据结构与方法：</p>
+<ul>
+<li>数据结构：</li>
+</ul>
+<p><code>struct list file_list;   /* 打开文件列表 */</code></p>
+<p><code>int next_fd;             /* 下一个打开文件的文件描述符，从2开始递增 */</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">file_info</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="type">int</span> fd;                             <span class="comment">/* 文件描述符 */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">file</span> *<span class="title">f</span>;</span>                     </span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_elem</span> <span class="title">elem</span>;</span>              <span class="comment">/* file_list中的list_elem */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>并在<code>init_thread</code>初始化file_list、将next_fd初始化为2。</p>
+<ul>
+<li>方法：<br>下面的<code>find_in_file_list</code>方法根据fd在当前线程的file_list中找到对应的file_info。如果没有对应文件，则返回NULL。<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="keyword">struct</span> file_info *</span><br><span class="line"><span class="title function_">find_in_file_list</span><span class="params">(<span class="type">int</span> fd)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">thread</span> *<span class="title">cur</span> =</span> thread_current();</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_elem</span> *<span class="title">e</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">file_info</span> *<span class="title">file</span>;</span></span><br><span class="line">  <span class="keyword">for</span> (e = list_begin (&amp;cur-&gt;file_list); e != list_end (&amp;cur-&gt;file_list); e = list_next (e))</span><br><span class="line">  &#123;</span><br><span class="line">    file = list_entry(e, <span class="keyword">struct</span> file_info, elem);</span><br><span class="line">    <span class="keyword">if</span> (file-&gt;fd == fd) &#123;</span><br><span class="line">      <span class="keyword">return</span> file;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>System Call: int open (const char *file)</p>
+<p>打开（<code>filesys_open</code>）名为 file_name 的文件，返回文件描述符（fd写入到f-&gt;eax）。如果打开成功，则新建file_info类型变量，用malloc为其分配空间，然后令其fd的值为线程的next_fd，将其文件指针f指向打开的文件。然后将其加入当前线程的file_list。<br>如果无法打开文件，则返回-1。</p>
+</li>
+<li><p>System Call: int filesize (int fd)</p>
+<p>返回以fd打开的文件的大小。</p>
+<p>先得到参数fd，然后在当前线程的file_list中寻找文件描述符为fd的文件（通过<code>find_in_file_list</code>），若存在，filesys中已经提供了对应的实现file_length，调用之并将返回值写入f-&gt;eax即可。若不存在，则返回-1。</p>
+</li>
+<li><p>System Call: int read (int fd, void *buffer, unsigned size)</p>
+<p>从打开为fd的文件中读取size个字节到buffer中。返回实际读取的字节数（文件末尾为0），如果无法读取文件（由于文件末尾以外的条件），则返回-1。</p>
+<p>fd为0（标准输入）则使用<code>input_getc()</code>从键盘读取size个字节，然后将size返回。<br>否则，在当前线程的file_list中找到对应的文件，并用<code>file_read</code>方法读取文件，并将file_read的返回值（实际读取字节数）写到f-&gt;eax。如果找不到对应文件，则返回-1.</p>
+</li>
+<li><p>System Call: int write (int fd, const void *buffer, unsigned size)</p>
+<p>write系统调用已经在3.2.3系统调用基础结构中实现了<code>fd == 1</code>的部分。这里只需将其补充完整。<br>与上面的read类似，只需要将<code>file_read</code>换成<code>file_write</code>即可。</p>
+<p>以下是补充的代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">file_info</span> *<span class="title">file</span> =</span> find_in_file_list(fd);</span><br><span class="line"><span class="keyword">if</span> (file)&#123;</span><br><span class="line">  lock_acquire(&amp;file_lock);  </span><br><span class="line">  f-&gt;eax = file_write(file-&gt;f, buf, size);</span><br><span class="line">  lock_release(&amp;file_lock);    </span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">  f-&gt;eax = <span class="number">0</span>; <span class="comment">//文档要求如果根本无法写入任何字节，则返回0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>System Call: void seek (int fd, unsigned position)</p>
+<p>将打开文件fd中要读取或写入的下一个字节更改为position，以从文件开头开始的字节表示。</p>
+<p>文档中提出这里已经在文件系统中（<code>file_seek</code>）实现，不需要额外的工作。即只需找到fd对应的file，并将其与参数中的position传递给file_seek执行。如果找不到fd则返回-1。其余与其他文件系统调用类似。</p>
+</li>
+<li><p>System Call: unsigned tell (int fd)</p>
+<p>返回打开文件fd中要读取或写入的下一个字节的位置，以从文件开头开始的字节数表示。类似的，调用file_tell即可。</p>
+</li>
+<li><p>System Call: void close (int fd)<br>调用<code>file_close</code>关闭文件描述符fd。需要注意的是，关闭该文件后需要将其从file_list中移除，并释放其空间。其余与上相同。</p>
+<p>另外，文档中提到“退出或终止进程会隐式关闭其所有打开的文件描述符，就像通过为每个进程调用此函数一样”。</p>
+<p>因此，在线程退出时需要检索其file_list，关闭其打开的所有文件，并释放空间。<br>为thread_exit增加如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 关闭所有已打开的文件 */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">file_info</span> *<span class="title">file_opened</span>;</span></span><br><span class="line"><span class="keyword">while</span> (!list_empty(&amp;cur-&gt;file_list))</span><br><span class="line">&#123;</span><br><span class="line">  e = list_pop_front(&amp;cur-&gt;file_list);</span><br><span class="line">  file_opened = list_entry(e, <span class="keyword">struct</span> file_info, elem);</span><br><span class="line">  lock_acquire(&amp;file_lock);</span><br><span class="line">  file_close(file_opened-&gt;f);</span><br><span class="line">  lock_release(&amp;file_lock);</span><br><span class="line">  <span class="built_in">free</span>(file_opened);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3-2-4-Denying-Writes-to-Executables"><a href="#3-2-4-Denying-Writes-to-Executables" class="headerlink" title="3.2.4 Denying Writes to Executables"></a>3.2.4 Denying Writes to Executables</h4><p>文档的最后要求添加代码以拒绝写入用作可执行文件的文件。并提示可以使用<code>file_deny_write（）</code>防止写入打开的文件，只要进程仍在运行，文件就必须保持打开状态。</p>
+<p>故在thread结构体中增加成员以方便在进程退出时关闭打开的可执行文件：</p>
+<p><code>struct file *file_executed;          /* 正在执行的文件 */</code></p>
+<p>进程启动时将通过<code>process_execute</code>方法创建一个新线程，并在<code>start_process</code>中通过<code>load</code>加载可执行文件。<br>当加载成功后，添加如下代码以拒绝该可执行文件被修改：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">···</span><br><span class="line">success = load (proc_name, &amp;if_.eip, &amp;if_.esp);</span><br><span class="line"><span class="keyword">if</span>(success)&#123;</span><br><span class="line">  <span class="comment">// 这里的file_lock即上面在syscall.h中声明的锁</span></span><br><span class="line">  lock_acquire(&amp;file_lock);</span><br><span class="line">  <span class="comment">// 进程仍在运行，文件就必须保持打开状态</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">file</span> *<span class="title">f</span> =</span> filesys_open(proc_name);</span><br><span class="line">  <span class="comment">// 拒绝写入</span></span><br><span class="line">  file_deny_write(f);</span><br><span class="line">  lock_release(&amp;file_lock);</span><br><span class="line">  thread_current()-&gt;file_executed = f;</span><br><span class="line">  ···</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在进程结束时，关闭该可执行文件。这将重新启用写操作。</p>
+<p>在<code>process_exit</code>的最后添加如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lock_acquire(&amp;file_lock);</span><br><span class="line">file_close(cur-&gt;file_executed);</span><br><span class="line">lock_release(&amp;file_lock);</span><br></pre></td></tr></table></figure>
+
+<p>至此，userprog完成。</p>
+<h3 id="3-3测试结果"><a href="#3-3测试结果" class="headerlink" title="3.3测试结果"></a>3.3测试结果</h3><img src="/img/loading.gif" data-original="http://oss.ripplesu.top/blog/Typora/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1-pintos/userprog1.png">
+
+<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><p>本次实验完成了thread和userprog两部分，并且通过了全部测试点，从中我学到了很多东西。</p>
+<p>thread实验中主要困难在于实现线程的调度。刚接触pintos让我有点无从下手，但在理解了pintos中的时钟中断处理与线程调度过程后，写起代码来也就得心应手。不过即使最后通过了所有测试点，在此过程中我仍有一些没有完全理解的地方；写报告的时候回过头来看又发现了一些不影响测试结果的错误。</p>
+<p>例如原来在实现Alarm Clock的时候，原本只在thread结构体中增加了sleep_ticks变量，而没有sleep_list记录睡眠的线程。在调用timer_sleep时设置sleep_ticks的值并将其挂起，然后在timer_interrupt中查找all_list中的线程，使每个睡眠线程的sleep_ticks–；减至0时，将其唤醒。但是这种设计效率较低，而且不知为何导致后面一个测试点始终无法pass。<br>后来增加了sleep_list记录睡眠的线程，调用timer_sleep时将该线程放入sleep_list列表，在每个timer_interrupt时只检查sleep_list中的线程；若到达睡眠时间，则将其从sleep_list移除，并放入ready_list。从我个人理解来说，这样只减少了timer_interrupt中执行的任务量，提高了系统的效率。但修改之后，之前过不了的测试点莫名其妙也过了。这说明我的代码中可能还存在其他的错误。</p>
+<p>再比如说，在将信号量和条件的等待队列改造为优先队列时，原本sema_down和cond_wait中通过list_insert_ordered进行有序插入，然后在唤醒线程时调用list_pop_front唤醒优先级最高的线程。理论上讲上述过程应该没有问题，但在执行过程中发现有几个测试点过不了；在pop_front前对队列执行一次排序后，对应的测试点就通过了。考虑可能是没有唤醒优先级最高的线程，但始终无法找到问题的根源。<br>最终版本中，我把insert_ordered都换回了push_back，然后在唤醒线程时调用list_min（max）找到优先级最大的线程，从而通过了上述的几个测试点。</p>
+<p>这也让我深刻体会到，要编写一个没有漏洞的、能够实际使用的操作系统内核有多么困难。</p>
+<p>而userprog的难点对我来说，主要在于对内核堆栈、程序加载与启动的理解。有了前面的基础，在理解了相关内容（例如指针的偏移）后编写代码也并不难，而且会发现有许多相似的工作。pintos也已经很大程度上简化了这部分的工作量，比如说每个进程只有一个线程、每个系统调用参数在堆栈中都占用4个字节、filesys中已经提供了许多功能的实现等等，文档中也给出了足够的提示。</p>
+<p>相较于thread来说，个人认为userprog没有什么复杂的流程，但要通过所有测试点要比thread难不少，因为要考虑好父子进程的同步问题、文件的互斥问题、资源的回收、指针的检查等，稍不留神就可能导致父进程忙等、kernel panic等错误，这些错误又很难用gdb调试找到根源。</p>
+<p>在这两个实验中，并发、互斥与同步都是重点，测试点中也有很多相关的地方。如何通过信号量、锁、条件变量来实现进程间的互斥与同步、临界区的访问等，这部分知识在课堂上也是重点内容。两个实验做下来，我认为难点不在于编写代码，而是理解操作系统底层知识、任务要求、内核代码的运行逻辑。在编写代码前，需要对pintos的同步机制、中断等有一个全面的认识。掌握了这些基本原理以后，解决实际问题时就更加得心应手。各种算法设计方案的正确与否，都能够通过测试来检验，测试中如果遇到问题，有了这些基本理论的加持，也就不会手足无措。本次课程设计很好地检验了我这部分知识的掌握情况，也锻炼了我将这部分知识投入实践的能力。</p>
+<p>如何设计实验方案也是一个重要的内容。虽然文档中给出较为详细的任务要求，userprog中还给出了推荐的实现步骤，但最终还是要靠自己设计一个正确的实验方案与实现步骤。不合理的实现步骤可能徒增工作量甚至导致冲突。本次实验也锻炼了我这部分能力。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://blog.ripplesu.top">RippleSu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://blog.ripplesu.top/2023/02/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1-pintos/">http://blog.ripplesu.top/2023/02/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1-pintos/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.ripplesu.top" target="_blank">RippleSu's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></div><div class="post_share"><div class="social-share" data-image="http://img.ripplesu.top/random?dir=竖屏&amp;操作系统课程设计-pintos" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/02/25/SpringBoot%E6%95%B4%E5%90%88SpringMail%E7%9A%84%E4%B8%80%E4%B8%AAdemo/" title="SpringBoot整合SpringMail的一个demo"><img class="cover" src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;SpringBoot整合SpringMail的一个demo" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SpringBoot整合SpringMail的一个demo</div></div></a></div><div class="next-post pull-right"><a href="/2023/02/23/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" title="非关系式数据库期末复习"><img class="cover" src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;非关系式数据库期末复习" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">非关系式数据库期末复习</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/02/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" title="操作系统期末复习"><img class="cover" src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&操作系统期末复习" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-14</div><div class="title">操作系统期末复习</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="http://121.41.55.70:9000/image-lib/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">RippleSu</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/S-Lucien" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:syp@ripplesu.top" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%9E%E9%AA%8C%E5%87%86%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text">1.实验准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E5%AE%89%E8%A3%85Docker"><span class="toc-number">1.1.</span> <span class="toc-text">1.1安装Docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E4%B8%8B%E8%BD%BD%E5%B9%B6%E9%85%8D%E7%BD%AEPintos"><span class="toc-number">1.2.</span> <span class="toc-text">1.2下载并配置Pintos</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3%E4%BD%BF%E7%94%A8Pintos"><span class="toc-number">1.3.</span> <span class="toc-text">1.3使用Pintos</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Project1%EF%BC%9AThreads"><span class="toc-number">2.</span> <span class="toc-text">2. Project1：Threads</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 实验内容</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-Alarm-Clock"><span class="toc-number">2.1.1.</span> <span class="toc-text">2.1.1 Alarm Clock</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-Priority-Scheduling"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.1.2 Priority Scheduling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-3-Advanced-Scheduler"><span class="toc-number">2.1.3.</span> <span class="toc-text">2.1.3 Advanced Scheduler</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 功能实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-Alarm-Clock"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.2.1 Alarm Clock</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-Priority-Scheduling"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2.2 Priority Scheduling</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%98%E5%85%88%E8%B0%83%E5%BA%A6%E9%AB%98%E4%BC%98%E5%85%88%E7%BA%A7%E7%BA%BF%E7%A8%8B"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">优先调度高优先级线程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%BC%98%E5%85%88%E7%BA%A7%E6%8D%90%E8%B5%A0"><span class="toc-number">2.2.2.2.</span> <span class="toc-text">实现优先级捐赠</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%E5%AE%9E%E7%8E%B0priority%E7%9A%84get%E3%80%81set%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.2.3.</span> <span class="toc-text">补充实现priority的get、set方法</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-3-Advanced-Scheduler"><span class="toc-number">2.2.3.</span> <span class="toc-text">2.2.3 Advanced Scheduler</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 测试结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Project2%EF%BC%9AUser-Programs"><span class="toc-number">3.</span> <span class="toc-text">3. Project2：User Programs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 实验内容</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1-Process-Termination-Messages"><span class="toc-number">3.1.1.</span> <span class="toc-text">3.1.1 Process Termination Messages</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-Argument-Passing"><span class="toc-number">3.1.2.</span> <span class="toc-text">3.1.2 Argument Passing</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-3-System-Calls"><span class="toc-number">3.1.3.</span> <span class="toc-text">3.1.3 System Calls</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-4-Denying-Writes-to-Executables"><span class="toc-number">3.1.4.</span> <span class="toc-text">3.1.4 Denying Writes to Executables</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 功能实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-Process-Termination-Messages"><span class="toc-number">3.2.1.</span> <span class="toc-text">3.2.1 Process Termination Messages</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-Argument-Passing"><span class="toc-number">3.2.2.</span> <span class="toc-text">3.2.2 Argument Passing</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#process-execute"><span class="toc-number">3.2.2.1.</span> <span class="toc-text">process_execute</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#start-process"><span class="toc-number">3.2.2.2.</span> <span class="toc-text">start_process</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-System-Calls"><span class="toc-number">3.2.3.</span> <span class="toc-text">3.2.3 System Calls</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E5%86%85%E5%AD%98%E8%AE%BF%E9%97%AE"><span class="toc-number">3.2.3.1.</span> <span class="toc-text">用户内存访问</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%9F%BA%E7%A1%80%E7%BB%93%E6%9E%84"><span class="toc-number">3.2.3.2.</span> <span class="toc-text">系统调用基础结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#exec%E4%B8%8Ewait"><span class="toc-number">3.2.3.3.</span> <span class="toc-text">exec与wait</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">3.2.3.4.</span> <span class="toc-text">文件系统调用</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-4-Denying-Writes-to-Executables"><span class="toc-number">3.2.4.</span> <span class="toc-text">3.2.4 Denying Writes to Executables</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C"><span class="toc-number">3.3.</span> <span class="toc-text">3.3测试结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">4. 总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/11/18/GitHub%20Pages%E9%85%8D%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/" title="GitHub Pages配置自定义域名并利用Cloudflare CDN加速"><img src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;GitHub Pages配置自定义域名并利用Cloudflare CDN加速" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="GitHub Pages配置自定义域名并利用Cloudflare CDN加速"/></a><div class="content"><a class="title" href="/2023/11/18/GitHub%20Pages%E9%85%8D%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/" title="GitHub Pages配置自定义域名并利用Cloudflare CDN加速">GitHub Pages配置自定义域名并利用Cloudflare CDN加速</a><time datetime="2023-11-18T12:44:00.000Z" title="发表于 2023-11-18 20:44:00">2023-11-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/16/%E5%B7%A5%E7%A8%8B%E7%BB%8F%E6%B5%8E%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" title="工程经济期末复习"><img src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;工程经济期末复习" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="工程经济期末复习"/></a><div class="content"><a class="title" href="/2023/06/16/%E5%B7%A5%E7%A8%8B%E7%BB%8F%E6%B5%8E%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" title="工程经济期末复习">工程经济期末复习</a><time datetime="2023-06-16T06:44:08.000Z" title="发表于 2023-06-16 14:44:08">2023-06-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/22/%E5%9F%BA%E4%BA%8Ecommons-pool2%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AF%B9%E8%B1%A1%E6%B1%A0/" title="基于commons-pool2自定义对象池"><img src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;基于commons-pool2自定义对象池" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于commons-pool2自定义对象池"/></a><div class="content"><a class="title" href="/2023/03/22/%E5%9F%BA%E4%BA%8Ecommons-pool2%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AF%B9%E8%B1%A1%E6%B1%A0/" title="基于commons-pool2自定义对象池">基于commons-pool2自定义对象池</a><time datetime="2023-03-22T14:29:29.000Z" title="发表于 2023-03-22 22:29:29">2023-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/10/Hadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" title="Hadoop伪分布式集群搭建"><img src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;Hadoop伪分布式集群搭建" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hadoop伪分布式集群搭建"/></a><div class="content"><a class="title" href="/2023/03/10/Hadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" title="Hadoop伪分布式集群搭建">Hadoop伪分布式集群搭建</a><time datetime="2023-03-10T10:41:47.000Z" title="发表于 2023-03-10 18:41:47">2023-03-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/27/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="git常用命令"><img src="/img/loading.gif" data-original="http://img.ripplesu.top/random?dir=竖屏&amp;git常用命令" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="git常用命令"/></a><div class="content"><a class="title" href="/2023/02/27/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="git常用命令">git常用命令</a><time datetime="2023-02-27T10:03:53.000Z" title="发表于 2023-02-27 18:03:53">2023-02-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By RippleSu</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const disqus_config = function () {
+    this.page.url = 'http://blog.ripplesu.top/2023/02/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1-pintos/'
+    this.page.identifier = '/2023/02/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1-pintos/'
+    this.page.title = '操作系统课程设计-pintos'
+  }
+
+  const disqusReset = () => {
+    window.DISQUS && window.DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  btf.addGlobalFn('themeChange', disqusReset, 'disqus')
+
+  const loadDisqus = () =>{
+    if (window.DISQUS) disqusReset()
+    else {
+      const script = document.createElement('script')
+      script.src = 'https://.disqus.com/embed.js'
+      script.setAttribute('data-timestamp', +new Date())
+      document.head.appendChild(script)
+    }
+  }
+
+  const getCount = async() => {
+    try {
+      const eleGroup = document.querySelector('#post-meta .disqus-comment-count')
+      if (!eleGroup) return
+      const cleanedLinks = eleGroup.href.replace(/#post-comment$/, '')
+
+      const res = await fetch(`https://disqus.com/api/3.0/threads/set.json?forum=&api_key=&thread:link=${cleanedLinks}`,{
+        method: 'GET'
+      })
+      const result = await res.json()
+
+      const count = result.response.length ? result.response[0].posts : 0
+      eleGroup.textContent = count
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  if ('Valine' === 'Disqus' || !false) {
+    if (false) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+    else {
+      loadDisqus()
+      
+    }
+  } else {
+    window.loadOtherComment = loadDisqus
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
