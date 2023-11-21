@@ -12,8 +12,8 @@ http://blog.ripplesu.top/2023/02/25/SpringBoot%E6%95%B4%E5%90%88SpringMail%E7%9A
 http://blog.ripplesu.top/2023/03/10/Hadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/
 http://blog.ripplesu.top/2023/02/27/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/
 http://blog.ripplesu.top/2023/11/18/GitHub%20Pages%E9%85%8D%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/
-http://blog.ripplesu.top/categories/index.html
 http://blog.ripplesu.top/tags/index.html
+http://blog.ripplesu.top/categories/index.html
 http://blog.ripplesu.top/about/index.html
 http://blog.ripplesu.top/
 http://blog.ripplesu.top/tags/Hadoop/
@@ -25,8 +25,8 @@ http://blog.ripplesu.top/tags/%E5%89%8D%E7%AB%AF/
 http://blog.ripplesu.top/tags/Html/
 http://blog.ripplesu.top/tags/CSS/
 http://blog.ripplesu.top/tags/JavaScript/
-http://blog.ripplesu.top/tags/%E5%AF%B9%E8%B1%A1%E6%B1%A0/
 http://blog.ripplesu.top/tags/Git/
+http://blog.ripplesu.top/tags/%E5%AF%B9%E8%B1%A1%E6%B1%A0/
 http://blog.ripplesu.top/tags/%E5%B7%A5%E7%A8%8B%E7%BB%8F%E6%B5%8E/
 http://blog.ripplesu.top/tags/%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/
 http://blog.ripplesu.top/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/
