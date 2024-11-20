@@ -218,6 +218,20 @@
 
   
   <url>
+    <loc>http://blog.ripplesu.top/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/</loc>
+    <lastmod>2024-11-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.ripplesu.top/tags/SQL%E6%B3%A8%E5%85%A5/</loc>
+    <lastmod>2024-11-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.ripplesu.top/tags/Hadoop/</loc>
     <lastmod>2024-11-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -240,27 +254,6 @@
   
   <url>
     <loc>http://blog.ripplesu.top/tags/MySQL/</loc>
-    <lastmod>2024-11-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.ripplesu.top/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2024-11-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.ripplesu.top/tags/SQL%E6%B3%A8%E5%85%A5/</loc>
-    <lastmod>2024-11-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.ripplesu.top/tags/Spring-Mail/</loc>
     <lastmod>2024-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -295,6 +288,13 @@
   </url>
   
   <url>
+    <loc>http://blog.ripplesu.top/tags/Spring-Mail/</loc>
+    <lastmod>2024-11-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.ripplesu.top/tags/Git/</loc>
     <lastmod>2024-11-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -316,14 +316,14 @@
   </url>
   
   <url>
-    <loc>http://blog.ripplesu.top/tags/%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/</loc>
+    <loc>http://blog.ripplesu.top/tags/MyFlash/</loc>
     <lastmod>2024-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.ripplesu.top/tags/MyFlash/</loc>
+    <loc>http://blog.ripplesu.top/tags/%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/</loc>
     <lastmod>2024-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
